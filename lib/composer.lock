@@ -1,0 +1,123 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "3f4e7d172d6cb4555fd8eee3db70c94c",
+    "packages": [
+        {
+            "name": "herrera-io/file-locator",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/herrera-io/php-file-locator.git",
+                "reference": "5762d9c38f95f7fbbf61be10f5e544ea9774a755"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/herrera-io/php-file-locator/zipball/5762d9c38f95f7fbbf61be10f5e544ea9774a755",
+                "reference": "5762d9c38f95f7fbbf61be10f5e544ea9774a755",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Herrera\\FileLocator": "src/lib"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kevin Herrera",
+                    "email": "kevin@herrera.io",
+                    "homepage": "http://kevin.herrera.io"
+                }
+            ],
+            "description": "A simple file locator library.",
+            "homepage": "https://herrera-io.github.com/php-file-locator",
+            "keywords": [
+                "file",
+                "locator"
+            ],
+            "time": "2013-01-16 19:23:05"
+        },
+        {
+            "name": "herrera-io/template",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/herrera-io/php-template.git",
+                "reference": "1f8b4ac41b5de09b4f534128fa449df5fb9b4804"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/herrera-io/php-template/zipball/1f8b4ac41b5de09b4f534128fa449df5fb9b4804",
+                "reference": "1f8b4ac41b5de09b4f534128fa449df5fb9b4804",
+                "shasum": ""
+            },
+            "require": {
+                "herrera-io/file-locator": "1.*",
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "herrera-io/phpunit-test-case": "~1.0",
+                "phpunit/phpunit": "~3.7"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Herrera\\Template": "src/lib"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kevin Herrera",
+                    "email": "kevin@herrera.io",
+                    "homepage": "http://kevin.herrera.io"
+                }
+            ],
+            "description": "A simple templating engine using regular PHP files.",
+            "homepage": "http://herrera-io.github.com/php-template",
+            "keywords": [
+                "templating"
+            ],
+            "time": "2013-06-18 22:20:40"
+        }
+    ],
+    "packages-dev": [
+
+    ],
+    "aliases": [
+
+    ],
+    "minimum-stability": "stable",
+    "stability-flags": [
+
+    ],
+    "platform": [
+
+    ],
+    "platform-dev": [
+
+    ]
+}
