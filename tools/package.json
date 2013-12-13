@@ -1,0 +1,14 @@
+{
+  "name": "weapp-tools",
+  "version": "0.1.1",
+  "description": "weapp tools",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "aohajin",
+  "license": "WTFPL",
+  "dependencies": {
+    "jquery": "~1.8.3"
+  }
+}

@@ -1,0 +1,12 @@
+{
+    "license": "WTFPL",
+    "require": {
+        "php": ">=5.3.3",
+        "herrera-io/template": "~2.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Weapp": "module/"
+        }
+    }
+}

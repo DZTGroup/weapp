@@ -13,7 +13,8 @@ FCAPP.Index = FCAPP.Index || {
         if (window.gQuery && gQuery.id) {
             id = gQuery.id;
         }
-        FCAPP.Common.loadShareData(id);
+        // mod by aohajin. it seems not needed.
+        //FCAPP.Common.loadShareData(id);
         $(window).resize(function () {
             Index.resizeMapImg(R);
             FCAPP.Common.resizeLayout(R.popTips);
@@ -43,7 +44,7 @@ FCAPP.Index = FCAPP.Index || {
         datafile += 'index.js?';
         $.ajax({
            /* url: 'http://trade.qq.com/fangchan/static/' + datafile + dt.getDate() + dt.getHours(),     */   /*** todo 路径需要修改***/
-		   url: 'data.js', 
+		   url: 'data.js',
             dataType: 'jsonp'
         });
     },

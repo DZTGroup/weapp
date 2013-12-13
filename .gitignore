@@ -1,2 +1,3 @@
-lib/vendor/*
-lib/composer.lock
+php/vendor/*
+php/composer.lock
+tools/node_modules/*
