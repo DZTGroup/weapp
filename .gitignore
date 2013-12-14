@@ -3,4 +3,3 @@ php/composer.lock
 tools/node_modules/*
 
 public_html/data/*
-!public_html/data/template/*

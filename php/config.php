@@ -11,5 +11,5 @@ define('DB_DATABASENAME', 'wxfc');
 /*
  * Path Configuration
  */
-
+define('TEMPLATE_PATH', dirname(__FILE__).'/template');
 define('TARGET_PATH', dirname(__FILE__).'/../public_html/data');

@@ -42,7 +42,7 @@ FCAPP.Index = FCAPP.Index || {
             dt = new Date();
         id = id.replace(/[<>\'\"\/\\&#\?\s\r\n]+/gi, '');
         // mod by aohajin
-        var path = '/weapp/public_html/data/'+id+'/wechat/index.js?';
+        var path = '/weapp/public_html/data/'+id+'/wechat/intro.js?';
         $.ajax({
             url: path + dt.getDate() + dt.getHours(),
             dataType: 'jsonp'

@@ -23,8 +23,8 @@ class TemplateLoader{
             '__DEFAULT__' => array(
                 'banner_id' => '../banner.jpg',
             ),
-            '__TEMPLATE__' => 'index.js.php',
-            '__TARGET__' => 'index.js',
+            '__TEMPLATE__' => 'intro.js.php',
+            '__TARGET__' => 'intro.js',
             'estate_id' => array('__CTX__', array('estate_id')),
             'banner_id' => array('banner','img'),
             'selling_info' => array('__SPLIT__', array('saling_info', 'text')),
@@ -35,6 +35,14 @@ class TemplateLoader{
             'lng' => array('location_info', 'lng'),
             'intro' => array('intro_info', 'text'),
             'traffic' => array('traffic_info', 'text'),
+        ],
+        'impression' => [
+            '__DEFAULT__' => array(),
+            '__TEMPLATE__' => 'impression.json.php',
+            '__TARGET__' => 'impression.json',
+            'estate_id' => array('__CTX__', array('estate_id')),
+            'sum' => array('init', 'number'),
+            'impressions' => array('__OBJECT__', array('impressions')),
         ],
     );
 
@@ -75,6 +83,8 @@ class TemplateLoader{
                         $templateValues[$key] = preg_split("/\r\n|\r|\n/", $plain);
                     else
                         $templateValues[$key] = ARRAY();
+                }elseif(Util::startsWith($head, '__OBJECT__')){
+                    $templateValues[$key] = retrieveData($data, $value[1]);
                 }else{
                     $templateValues[$key] = retrieveData($data, $value);
                 }
