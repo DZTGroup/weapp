@@ -18,7 +18,6 @@ function retrieveData( $origData, $path) {
     return $data;
 }
 
-
 class TemplateLoader{
     private $engine;
     private $context;
@@ -82,7 +81,7 @@ class TemplateLoader{
          * file output
          * */
 
-        $path = Util::getPath($this->context['estate_id']);
+        $path = Util::getPath($this->context['estate_id']).'/wechat';
 
         if (!file_exists($path)) {
             mkdir($path, 0700, true);

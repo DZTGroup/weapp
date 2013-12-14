@@ -21,5 +21,4 @@ class Util{
     }
 
     // databaes relative functions
-    //public static function load
 }
