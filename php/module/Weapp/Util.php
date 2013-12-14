@@ -23,7 +23,9 @@ class Util{
     // app general
     public static function getAppInfo($estateId){
         $db = \mysql_connect(DB_HOST, DB_USER, DB_PASS) or die("Database connect failed: ".mysql_error());
+
         \mysql_select_db(DB_DATABASENAME, $db);
+        \mysql_query("set names utf8");
 
         $result = \mysql_query('select * from Estate where id='.$estateId.' limit 1', $db);
 
