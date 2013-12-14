@@ -15,6 +15,11 @@ class Util{
         return $needle === "" || substr($haystack, -strlen($needle)) === $needle;
     }
 
+    // path
+    public static function getPath($estateId){
+        return TARGET_PATH.'/'.$estateId;
+    }
+
     // databaes relative functions
     //public static function load
 }

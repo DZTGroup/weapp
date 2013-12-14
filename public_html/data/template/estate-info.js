@@ -26,10 +26,10 @@ renderData({
         title: '<?php echo $video_title?>'
     },
     ads: {
-        strong: '<?php echo $arr[0]?>',
-        price: '<?php echo $arr[1]?>',
-        unit: '<?php echo $arr[2]?>',
-        msg: '<?php echo $arr[3]?>'
+        strong: '',
+        price: '',
+        unit: '',
+        msg: ''
     },
     sellInfo: ['<?php echo $selling_info?>'],
     map: {

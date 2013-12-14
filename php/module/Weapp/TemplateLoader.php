@@ -7,6 +7,7 @@ function retrieveData( $origData, $path) {
     $data = $origData;
 
     foreach ( $path as $node ) {
+        if ( !array_key_exists($node, $data)) return;
         $data = $data[$node];
     }
 
@@ -75,6 +76,22 @@ class TemplateLoader{
             }
         }
 
-        return $this->engine->render($templateMapping['__TEMPLATE__'], $templateValues);
+        $text = $this->engine->render($templateMapping['__TEMPLATE__'], $templateValues);
+
+        /*
+         * file output
+         * */
+
+        $path = Util::getPath($this->context['estate_id']);
+
+        if (!file_exists($path)) {
+            mkdir($path, 0700, true);
+        }
+
+        $fh = fopen($path.'/'.$templateMapping['__TEMPLATE__'], 'w');
+        fwrite($fh, $text);
+        fclose($fh);
+
+        return $text;
     }
 }
