@@ -17,7 +17,7 @@ renderData({
     issue: 2,
     startTime: '1367139600',
     endTime: '1367229600',
-    banner: 'http://www.weixinfc.com/weapp/<?php echo $estate_id;?>/img/<?php echo $banner_id?>',
+    banner: '/weapp/public_html/data/<?php echo $estate_id;?>/wechat/<?php echo $banner_id?>',
     video: {
         pic: '',
         vid:'<?php echo $video_id?>',

@@ -24,7 +24,7 @@ class TemplateLoader{
 
     private $templateMapping = array(
         'intro' => [
-            '__TEMPLATE__' => 'estate-info.js',
+            '__TEMPLATE__' => 'index.js',
             'estate_id' => array('__CTX__', array('estate_id')),
             'banner_id' => array('banner','img'),
             'selling_info' => array('selling_info', 'text'),
@@ -42,10 +42,9 @@ class TemplateLoader{
         $this->engine = Engine::create($includePath);
     }
 
-    public function setUpContext($estateId, $groupId, $name, $appId, $appKey, $wechatId){
+    public function setUpContext($estateId, $name, $appId, $appKey, $wechatId){
         $this->context = array(
             'estate_id' => $estateId,
-            'group_id' => $groupId,
             'name' => $name,
             'app_id' => $appId,
             'app_key' => $appKey,
@@ -53,13 +52,13 @@ class TemplateLoader{
         );
     }
 
-    public function render($json, $type){
+    public function render($content, $type){
         if ($this->context == NULL) throw new \Exception('Call setUpContext before render.');
 
         $templateMapping = $this->templateMapping[$type];
         if ($templateMapping == NULL) throw new \Exception('Type '.$type.' not found.');
 
-        $data = json_decode($json, true);
+        $data = json_decode($content, true);
 
         $templateValues = array();
         foreach($templateMapping as $key => $value){
@@ -84,7 +83,7 @@ class TemplateLoader{
         $path = Util::getPath($this->context['estate_id']).'/wechat';
 
         if (!file_exists($path)) {
-            mkdir($path, 0700, true);
+            mkdir($path, 0755, true);
         }
 
         $fh = fopen($path.'/'.$templateMapping['__TEMPLATE__'], 'w');

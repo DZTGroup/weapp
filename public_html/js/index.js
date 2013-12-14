@@ -38,13 +38,13 @@ FCAPP.Index = FCAPP.Index || {
     },
     loadIndexData: function () {
         window.renderData = Index.renderData;
-        var datafile = window.gQuery && gQuery.id ? gQuery.id + '.' : '',
+        var id = window.gQuery && gQuery.id ? gQuery.id : 'default'
             dt = new Date();
-        datafile = datafile.replace(/[<>\'\"\/\\&#\?\s\r\n]+/gi, '');
-        datafile += 'index.js?';
+        id = id.replace(/[<>\'\"\/\\&#\?\s\r\n]+/gi, '');
+        // mod by aohajin
+        var path = '/weapp/public_html/data/'+id+'/wechat/index.js?';
         $.ajax({
-           /* url: 'http://trade.qq.com/fangchan/static/' + datafile + dt.getDate() + dt.getHours(),     */   /*** todo 路径需要修改***/
-		   url: 'data.js',
+            url: path + dt.getDate() + dt.getHours(),
             dataType: 'jsonp'
         });
     },
