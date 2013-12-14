@@ -25,7 +25,8 @@ class Entity{
 
         $json = '';
         if ($result){
-            $json = \mysql_fetch_array($result)['content'];
+            $tmp = \mysql_fetch_array($result);
+            $json = $tmp['content'];
         }
 
         \mysql_close($db);
