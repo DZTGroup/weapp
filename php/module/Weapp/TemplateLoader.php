@@ -19,7 +19,7 @@ class TemplateLoader{
     private $context;
 
     private $templateMapping = array(
-        'intro' => [
+        'intro' => array(
             '__DEFAULT__' => array(
                 'banner_id' => '../banner.jpg',
             ),
@@ -35,15 +35,15 @@ class TemplateLoader{
             'lng' => array('location_info', 'lng'),
             'intro' => array('intro_info', 'text'),
             'traffic' => array('traffic_info', 'text'),
-        ],
-        'impression' => [
+        ),
+        'impression' => array(
             '__DEFAULT__' => array(),
             '__TEMPLATE__' => 'impression.json.php',
             '__TARGET__' => 'impression.json',
             'estate_id' => array('__CTX__', array('estate_id')),
             'sum' => array('init', 'number'),
             'impressions' => array('__OBJECT__', array('impressions')),
-        ],
+        ),
     );
 
     public function __construct($includePath) {
