@@ -17,18 +17,18 @@ class Entity{
      ********************************/
     // Entity type enum('intro','apartment','group','picture','reservation','impression','comment')
     private static function getEntityContent($estateId, $type, $status){
-        $db = mysql_connect(DB_HOST, DB_USER, DB_PASS) or die("Database connect failed: ".mysql_error());
-        mysql_select_db(DB_DATABASENAME, $db);
+        $db = \mysql_connect(DB_HOST, DB_USER, DB_PASS) or die("Database connect failed: ".mysql_error());
+        \mysql_select_db(DB_DATABASENAME, $db);
 
-        $result = mysql_query('select * from Entity where estate_id='.$estateId
+        $result = \mysql_query('select * from Entity where estate_id='.$estateId
             .' and type="'.$type.'" and status="'.$status.'" order by create_time desc limit 1', $db);
 
         $json = '';
         if ($result){
-            $json = mysql_fetch_array($result)['content'];
+            $json = \mysql_fetch_array($result)['content'];
         }
 
-        mysql_close($db);
+        \mysql_close($db);
 
         return $json;
     }
