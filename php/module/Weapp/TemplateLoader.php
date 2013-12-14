@@ -108,7 +108,7 @@ class TemplateLoader{
         }
 
         $fh = fopen($path.'/'.$templateMapping['__TARGET__'], 'w');
-        fwrite($fh, $text);
+        fwrite($fh, \utf8_encode($text));
         fclose($fh);
 
         return $text;
