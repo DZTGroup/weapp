@@ -7,12 +7,8 @@ function retrieveData( $origData, $path) {
     $data = $origData;
 
     foreach ( $path as $node ) {
-        if ( !array_key_exists($node, $data)) return;
+        if ( !is_array($data) || !array_key_exists($node, $data)) return;
         $data = $data[$node];
-    }
-
-    if ( \is_string($data) ){
-        str_replace($data, '\n', '<br />');
     }
 
     return $data;
@@ -24,11 +20,15 @@ class TemplateLoader{
 
     private $templateMapping = array(
         'intro' => [
-            '__TEMPLATE__' => 'index.js',
+            '__DEFAULT__' => array(
+                'banner_id' => '../banner.jpg',
+            ),
+            '__TEMPLATE__' => 'index.js.php',
+            '__TARGET__' => 'index.js',
             'estate_id' => array('__CTX__', array('estate_id')),
             'banner_id' => array('banner','img'),
-            'selling_info' => array('selling_info', 'text'),
-            'video_id' => array('video_info', 'id'),
+            'selling_info' => array('__SPLIT__', array('saling_info', 'text')),
+            'video_id' => array('video_info', 'link'),
             'video_title' => array('video_info', 'name'),
             'address' => array('location_info','address'),
             'lat' => array('location_info', 'lat'),
@@ -52,7 +52,7 @@ class TemplateLoader{
         );
     }
 
-    public function render($content, $type){
+    public function render($content, $type, $target='wechat'){
         if ($this->context == NULL) throw new \Exception('Call setUpContext before render.');
 
         $templateMapping = $this->templateMapping[$type];
@@ -66,10 +66,21 @@ class TemplateLoader{
 
             }else{
                 $head = $value[0];
-                if (Util::startsWith($head, '__')){
+                if (Util::startsWith($head, '__CTX__')){
                     $templateValues[$key] = retrieveData($this->context, $value[1]);
+                }elseif(Util::startsWith($head, '__SPLIT__')){
+                    $plain = retrieveData($data, $value[1]);
+                    // string => array
+                    if (is_string($plain))
+                        $templateValues[$key] = preg_split("/\r\n|\r|\n/", $plain);
+                    else
+                        $templateValues[$key] = ARRAY();
                 }else{
                     $templateValues[$key] = retrieveData($data, $value);
+                }
+
+                if ( !$templateValues[$key] && array_key_exists($key, $templateMapping['__DEFAULT__'])){
+                    $templateValues[$key] = $templateMapping['__DEFAULT__'][$key];
                 }
             }
         }
@@ -80,13 +91,13 @@ class TemplateLoader{
          * file output
          * */
 
-        $path = Util::getPath($this->context['estate_id']).'/wechat';
+        $path = Util::getPath($this->context['estate_id']).'/'.$target;
 
         if (!file_exists($path)) {
             mkdir($path, 0755, true);
         }
 
-        $fh = fopen($path.'/'.$templateMapping['__TEMPLATE__'], 'w');
+        $fh = fopen($path.'/'.$templateMapping['__TARGET__'], 'w');
         fwrite($fh, $text);
         fclose($fh);
 
