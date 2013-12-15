@@ -31,6 +31,6 @@ $type = $_get["t"];
 $state = rawurlencode($_SERVER['QUERY_STRING']);
 $redirect = rawurlencode(CGI_URI.'/jump_with_id');
 
-$uri = WECHAT_REDIRECT.'?appid='.$appid.'&redirect_uri='.$redirect.'&response_type=code&scope=snsapi_base&state='.$state.'#wechat_redirect';
+$url = WECHAT_REDIRECT.'?appid='.$appid.'&redirect_uri='.$redirect.'&response_type=code&scope=snsapi_base&state='.$state.'#wechat_redirect';
 
-header( 'Location: '.$uri );
+header( 'Location: '.$url );

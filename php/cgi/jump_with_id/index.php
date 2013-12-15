@@ -22,12 +22,32 @@ $arr = null;
 if ($result){
     $arr = \mysql_fetch_array($result);
 }
-
-\mysql_close($db);
 $appkey = $arr['app_key'];
 
 // access token
 $query = http_build_query(array('appid'=>$appid, 'secret'=>$appkey, 'code'=>$code, 'grant_type'=>'authorization_code'));
 $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?' . $query;
-$token = file_get_contents($url);
-var_dump($token);
+
+$ticket = ($ticket = file_get_contents($url)) ? json_decode($ticket, true): array();
+
+if ( array_key_exists('access_token',$ticket ) ){
+    $openid = $ticket['openid'];
+    $token = $ticket['access_token'];
+
+    $result = \mysql_query('select count(1) as c from Customer where customer_id='.$openid, $db);
+    if ( !$result || mysql_fetch_array($result)['c'] == 0 ){
+        $query = http_build_query(array('access_token'=>$token, 'openid'=>$openid));
+        $url = 'https://api.weixin.qq.com/sns/userinfo?'. $query;
+
+        $info = ($info = file_get_contents($url)) ? json_decode($info, true): array();
+        if ( array_key_exists('openid', $info)){
+            mysql_query('insert into Customer ("customer_id", "customer_nickname", "sex") values ('
+                .$info['openid'].','.$info['nickname'].','.$info['sex'].')');
+        }
+    }
+}
+\mysql_close($db);
+
+$query = http_build_query(array('appid'=>$appid, 'eid'=>$eid, 'openid'=>$openid));
+$url = 'http://'.$_SERVER['SERVER_NAME'].'/weapp/public_html/'.$t.'/.html?'.$query;
+header( 'Location: '.$url );
