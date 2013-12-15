@@ -16,7 +16,7 @@ $db = \mysql_connect(DB_HOST, DB_USER, DB_PASS) or die("Database connect failed:
 \mysql_select_db(DB_DATABASENAME, $db);
 \mysql_query("set names utf8");
 
-$result = \mysql_query('select app_key from Estate where app_id='.$appid.' limit 1', $db);
+$result = \mysql_query('select app_key from Estate where id='.$eid.' limit 1', $db);
 
 $arr = null;
 if ($result){
@@ -25,6 +25,7 @@ if ($result){
 
 \mysql_close($db);
 $appkey = $arr['app_key'];
+echo($appkey);
 
 // access token
 echo('https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$appid.'&secret='.$appkey.'&code='.$code.'&grant_type=authorization_code');
