@@ -34,6 +34,8 @@ if ( array_key_exists('access_token',$ticket ) ){
     $openid = $ticket['openid'];
     $token = $ticket['access_token'];
 
+    error_log($openid);
+
     $result = \mysql_query('select count(1) as c from Customer where customer_id='.$openid, $db);
     if ( !$result || mysql_fetch_array($result)['c'] == 0 ){
         $query = http_build_query(array('access_token'=>$token, 'openid'=>$openid));
