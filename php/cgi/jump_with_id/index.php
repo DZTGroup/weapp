@@ -28,6 +28,6 @@ $appkey = $arr['app_key'];
 
 // access token
 $query = http_build_query(array('appid'=>$appid, 'secret'=>$appkey, 'code'=>$code, 'grant_type'=>'authorization_code'));
-$url = "https://api.weixin.qq.com/sns/oauth2/access_token?" . $query;
+$url = 'https://api.weixin.qq.com/sns/oauth2/access_token?' . $query;
 $token = file_get_contents($url);
 var_dump($token);
