@@ -25,9 +25,9 @@ if ($result){
 
 \mysql_close($db);
 $appkey = $arr['app_key'];
-// access token
 
+// access token
 $query = http_build_query(array('appid'=>$appid, 'secret'=>$appkey, 'code'=>$code, 'grant_type'=>'authorization_code'));
 $url = "https://api.weixin.qq.com/sns/oauth2/access_token?" . $query;
 $token = file_get_contents($url);
-echo $token;
+var_dump($token);
