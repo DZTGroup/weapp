@@ -21,7 +21,7 @@ $.getJSON("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&
                             {
                                 "name" : "楼盘简介",
                                 "type" : "view",
-                                "url" : "http://www.weixinfc.com/weapp/public_html/html/intro.html?id=32"
+                                "url" : "http://www.weixinfc.com/weapp/public_html/html/intro.html?eid=32"
                             },
                             {
                                 "name" : "十里画册",
@@ -36,7 +36,7 @@ $.getJSON("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&
                             {
                                 "name" : "楼盘印象",
                                 "type" : "view",
-                                "url" : "http://www.weixinfc.com/weapp/public_html/html/impression.html?id=32"
+                                "url" : "http://www.weixinfc.com/weapp/public_html/html/impression.html?eid=32"
                             }
                         ]
                     },

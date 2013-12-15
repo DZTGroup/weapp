@@ -8,7 +8,7 @@ FCAPP.Index = FCAPP.Index || {
             return;
         }
         Index.initElements();
-        Index.loadIndexData();
+        Index.loadIntroData();
         var id = '';
         if (window.gQuery && gQuery.id) {
             id = gQuery.id;
@@ -36,13 +36,13 @@ FCAPP.Index = FCAPP.Index || {
             R.popTips = $('div.pop_tips');
         }
     },
-    loadIndexData: function () {
+    loadIntroData: function () {
         window.renderData = Index.renderData;
-        var id = window.gQuery && gQuery.id ? gQuery.id : 'default'
+        var eid = window.gQuery && gQuery.eid ? gQuery.eid : 'default'
             dt = new Date();
-        id = id.replace(/[<>\'\"\/\\&#\?\s\r\n]+/gi, '');
+        eid = eid.replace(/[<>\'\"\/\\&#\?\s\r\n]+/gi, '');
         // mod by aohajin
-        var path = '/weapp/public_html/data/'+id+'/wechat/intro.js?';
+        var path = '/weapp/public_html/data/'+eid+'/wechat/intro.js?';
         $.ajax({
             url: path + dt.getDate() + dt.getHours(),
             dataType: 'jsonp'
