@@ -34,14 +34,17 @@ if ( array_key_exists('access_token',$ticket ) ){
     $openid = $ticket['openid'];
     $token = $ticket['access_token'];
 
-    error_log($openid);
-
     $result = \mysql_query('select count(1) as c from Customer where customer_id='.$openid, $db);
+
     if ( !$result || mysql_fetch_array($result)['c'] == 0 ){
+        //https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&openid=OPENID
         $query = http_build_query(array('access_token'=>$token, 'openid'=>$openid));
-        $url = 'https://api.weixin.qq.com/sns/userinfo?'. $query;
+        $url = 'https://api.weixin.qq.com/cgi-bin/user/info?'. $query;
 
         $info = ($info = file_get_contents($url)) ? json_decode($info, true): array();
+
+        error_log(json_encode($info));
+
         if ( array_key_exists('openid', $info)){
             mysql_query('insert into Customer ("customer_id", "customer_nickname", "sex") values ('
                 .$info['openid'].','.$info['nickname'].','.$info['sex'].')');
