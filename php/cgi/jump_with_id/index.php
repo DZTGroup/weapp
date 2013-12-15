@@ -25,9 +25,9 @@ if ($result){
 
 \mysql_close($db);
 $appkey = $arr['app_key'];
-echo($appkey);
-
 // access token
-echo('https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$appid.'&secret='.$appkey.'&code='.$code.'&grant_type=authorization_code');
-$token = file_get_contents('https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$appid.'&secret='.$appkey.'&code='.$code.'&grant_type=authorization_code');
-var_dump($token);
+
+$uri = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$appid.'&secret='.$appkey.'&code='.$code.'&grant_type=authorization_code';
+echo $uri;
+$token = file_get_contents($uri);
+echo $token;
