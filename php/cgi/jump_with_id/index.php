@@ -49,5 +49,5 @@ if ( array_key_exists('access_token',$ticket ) ){
 \mysql_close($db);
 
 $query = http_build_query(array('appid'=>$appid, 'eid'=>$eid, 'openid'=>$openid));
-$url = 'http://'.$_SERVER['SERVER_NAME'].'/weapp/public_html/'.$t.'/.html?'.$query;
+$url = 'http://'.$_SERVER['SERVER_NAME'].'/weapp/public_html/'.$t.'.html?'.$query;
 header( 'Location: '.$url );
