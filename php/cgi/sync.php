@@ -6,7 +6,7 @@
  * Time: 8:00 PM
  */
 
-require 'vendor/autoload.php';
+require(dirname(__FILE__).'/../vendor/autoload.php');
 require_once(dirname(__FILE__) . "/../config.php");
 
 use Weapp\TemplateLoader;
@@ -15,8 +15,8 @@ use Weapp\Entity;
 
 $estateId = $_GET["eid"];
 //$appid = $_GET["appid"];
-$type = $_get["t"];
-$formal = $_get["f"];
+$type = $_GET["t"];
+$formal = $_GET["f"];
 
 $engine = new TemplateLoader(TEMPLATE_PATH);
 
