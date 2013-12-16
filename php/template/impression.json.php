@@ -1,4 +1,4 @@
-{"sum":<?php echo $sum?$sun:0?>,"top":[
+{"sum":<?php echo $sum?$sum:0?>,"top":[
 <?php
 $index = 1;
 if ( is_array($impressions)) foreach($impressions as $impression){
