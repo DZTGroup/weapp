@@ -125,6 +125,7 @@ FCAPP.REVIEW = FCAPP.REVIEW || {
         });
     },
     renderReviewResult: function(base){
+        var R = REVIEW.RUNTIME;
         var res = R.userReview;
         res.top = base.top;
         res.sum = base.sum;
