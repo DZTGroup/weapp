@@ -28,7 +28,7 @@ if($cmd == 'get'){
     $stmt->execute(array('openid'=>$openid, 'eid'=>$estateId));
 
     $content = '';
-    $id = '';
+    $id = -1;
     if($stmt->rowCount() == 1){
         $row = $stmt->fetch();
 
