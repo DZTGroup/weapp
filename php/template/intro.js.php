@@ -8,8 +8,9 @@ renderData({
 <?php
 $vidQuery = parse_url($video_id, PHP_URL_QUERY);
 parse_str($vidQuery);
+if (! isset($vid)) $vid = '';
 ?>
-        vid:'<?php echo $vid?$vid:''?>',
+        vid:'<?php echo $vid?>',
         width: '290',
         height: '217',
         title: '<?php echo $video_title?>'

@@ -44,6 +44,14 @@ class TemplateLoader{
             'sum' => array('init', 'number'),
             'impressions' => array('__OBJECT__', array('impressions')),
         ),
+        // pic show
+        'picture' => array(
+            '__DEFAULT__' => array(),
+            '__TEMPLATE__' => 'picture.js.php',
+            '__TARGET__' => 'picture.js',
+            'estate_id' => array('__CTX__', array('estate_id')),
+            'data' => array('__OBJECT__', array()),
+        ),
     );
 
     public function __construct($includePath) {

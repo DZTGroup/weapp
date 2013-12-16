@@ -94,7 +94,7 @@ FCAPP.REVIEW = FCAPP.REVIEW || {
         var data = {
             callback: 'reviewResult',
             appid: window.gQuery && gQuery.appid ? gQuery.appid: '',
-            eid: window.gQuery && gQuery.eid ? gQuery.eid: '',
+            eid: window.gQuery && gQuery.eid ? gQuery.eid: 'default',
             openid: window.gQuery && gQuery.openid ? gQuery.openid: '',
             cmd: 'get'
         };
@@ -130,7 +130,7 @@ FCAPP.REVIEW = FCAPP.REVIEW || {
         res.top = base.top;
         res.sum = base.sum;
 
-        if (res.ret == 0) {
+        if (res.ret == 0 && res.top.length > 0) {
             var total = parseInt(res.sum),
                 top = res.top,
                 user = res.user;
