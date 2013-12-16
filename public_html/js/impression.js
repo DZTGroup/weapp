@@ -114,7 +114,7 @@ FCAPP.REVIEW = FCAPP.REVIEW || {
         var dt = new Date();
         var pathParameter = window.gQuery && gQuery.openid && gQuery.openid == 0 ? 'test':'wechat';
 
-        var path = '/weapp/public_html/data/'+eid+'/'+pathParameter+'/impression.js?';
+        var path = '/weapp/public_html/data/'+eid+'/'+pathParameter+'/impression.json?';
         $.getJSON(path + dt.getDate() + dt.getHours(), function(base){
             res.top = base.top;
             res.sum = base.sum;
