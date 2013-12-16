@@ -105,7 +105,10 @@ FCAPP.REVIEW = FCAPP.REVIEW || {
         });
     },
     reviewResult: function(res) {
+        window.renderReviewResult = REVIEW.renderReviewResult;
         var R = REVIEW.RUNTIME;
+        R.userReview = res;
+
         // mod by aohajin
         var staticUri = '/weapp/public_html/data';
         var eid = window.gQuery && gQuery.eid ? gQuery.eid : 'default';
@@ -115,42 +118,47 @@ FCAPP.REVIEW = FCAPP.REVIEW || {
         var pathParameter = window.gQuery && gQuery.openid && gQuery.openid == 0 ? 'test':'wechat';
 
         var path = '/weapp/public_html/data/'+eid+'/'+pathParameter+'/impression.json?';
-        $.getJSON(path + dt.getDate() + dt.getHours(), function(base){
-            res.top = base.top;
-            res.sum = base.sum;
 
-            if (res.ret == 0) {
-                var total = parseInt(res.sum),
-                    top = res.top,
-                    user = res.user;
-                R.totalReveiw = total;
-                R.topReview = top;
-                R.userReview = user;
-                for (var i = 0,
-                         il = top.length; i < il; i++) {
-                    top[i].count = Math.floor(parseInt(top[i].count) * 100 / total);
-                    if ( user.id != -1 &&  top[i].content === user.content ){
-                        user.count = top[i].count;
-                    }
-                }
-
-                R.switchPanels[0].html($.template(R.review, {
-                    top: top,
-                    user: user
-                }));
-            } else {
-                var msg = '哎呀~出了点儿小问题，点击刷新试试吧~';
-                if (res.ret == -100) {
-                    msg = '哎呀~出了点儿小问题';
-                }
-                REVIEW.showTips(true, {
-                    msg: msg
-                });
-            }
-            FCAPP.Common.hideLoading();
+        $.ajax({
+            url: path + dt.getDate() + dt.getHours(),
+            dataType: 'jsonp'
         });
     },
-    
+    renderReviewResult: function(base){
+        var res = R.userReview;
+        res.top = base.top;
+        res.sum = base.sum;
+
+        if (res.ret == 0) {
+            var total = parseInt(res.sum),
+                top = res.top,
+                user = res.user;
+            R.totalReveiw = total;
+            R.topReview = top;
+            R.userReview = user;
+            for (var i = 0,
+                     il = top.length; i < il; i++) {
+                top[i].count = Math.floor(parseInt(top[i].count) * 100 / total);
+                if ( user.id != -1 &&  top[i].content === user.content ){
+                    user.count = top[i].count;
+                }
+            }
+
+            R.switchPanels[0].html($.template(R.review, {
+                top: top,
+                user: user
+            }));
+        } else {
+            var msg = '哎呀~出了点儿小问题，点击刷新试试吧~';
+            if (res.ret == -100) {
+                msg = '哎呀~出了点儿小问题';
+            }
+            REVIEW.showTips(true, {
+                msg: msg
+            });
+        }
+        FCAPP.Common.hideLoading();
+    },
     addReview: function(id, content, cls) {
         var R = REVIEW.RUNTIME;
         if (R.userReview.id > 0) {

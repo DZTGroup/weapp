@@ -23,7 +23,7 @@ $engine = new TemplateLoader(TEMPLATE_PATH);
 $baseInfo = Util::getAppInfo($estateId);
 $engine->setUpContext($baseInfo['id'], $baseInfo['name'],$baseInfo['app_id'], $baseInfo['app_key'], $baseInfo['wechat_id']);
 
-if ( $formal ){
+if ( $formal > 0 ){
     $content = Entity::getApprovedEntityContent($estateId,$type);
     $engine->render($content, $type);
 }else{
