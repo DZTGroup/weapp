@@ -39,7 +39,7 @@ class TemplateLoader{
         'impression' => array(
             '__DEFAULT__' => array(),
             '__TEMPLATE__' => 'impression.js.php',
-            '__TARGET__' => 'impression.json',
+            '__TARGET__' => 'impression.js',
             'estate_id' => array('__CTX__', array('estate_id')),
             'sum' => array('init', 'number'),
             'impressions' => array('__OBJECT__', array('impressions')),
