@@ -259,7 +259,7 @@ FCAPP.REVIEW = FCAPP.REVIEW || {
             var top = R.topReview;
             for (var i = 0,
                      il = top.length; i < il; i++) {
-                top[i].count = Math.floor(parseInt(top[i].count) * 100 / total);
+                top[i].count = Math.floor(parseInt(top[i].count) * 100 / R.totalReveiw);
                 if ( top[i].content === review ){
                     R._userReviewCount = top[i].count;
                 }
