@@ -20,6 +20,7 @@ class Entity{
         $db = new \PDO('mysql:host='.DB_HOST.';dbname='.DB_DATABASENAME, DB_USER, DB_PASS, array(
                 \PDO::ATTR_ERRMODE => true,
                 \PDO::ERRMODE_EXCEPTION =>true,
+                \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
             ));
 
         $stmt = $db->prepare('select * from Entity where estate_id=:eid and type=:type and status=:status '

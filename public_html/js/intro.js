@@ -42,7 +42,7 @@ FCAPP.Index = FCAPP.Index || {
             dt = new Date();
         eid = eid.replace(/[<>\'\"\/\\&#\?\s\r\n]+/gi, '');
 
-        var pathParameter = window.gQuery && gQuery.openid && gQuery.openid === 0 ? 'test':'wechat';
+        var pathParameter = window.gQuery && gQuery.openid && gQuery.openid == 0 ? 'test':'wechat';
         // mod by aohajin
         var path = '/weapp/public_html/data/'+eid+'/'+pathParameter+'/intro.js?';
         $.ajax({

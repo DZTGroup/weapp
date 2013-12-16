@@ -25,6 +25,7 @@ class Util{
         $db = new \PDO('mysql:host='.DB_HOST.';dbname='.DB_DATABASENAME, DB_USER, DB_PASS, array(
                 \PDO::ATTR_ERRMODE => true,
                 \PDO::ERRMODE_EXCEPTION =>true,
+                \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
             ));
 
         $stmt = $db->prepare('select * from Estate where id=:eid limit 1');
@@ -39,6 +40,7 @@ class Util{
         $db = new \PDO('mysql:host='.DB_HOST.';dbname='.DB_DATABASENAME, DB_USER, DB_PASS, array(
                 \PDO::ATTR_ERRMODE => true,
                 \PDO::ERRMODE_EXCEPTION =>true,
+                \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
             ));
 
         $stmt = $db->prepare('select * from Estate where app_id=:appid limit 1');

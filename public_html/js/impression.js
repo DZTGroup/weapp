@@ -112,7 +112,7 @@ FCAPP.REVIEW = FCAPP.REVIEW || {
         eid = eid.replace(/[<>\'\"\/\\&#\?\s\r\n]+/gi, '');
 
         var dt = new Date();
-        var pathParameter = window.gQuery && gQuery.openid && gQuery.openid === 0 ? 'test':'wechat';
+        var pathParameter = window.gQuery && gQuery.openid && gQuery.openid == 0 ? 'test':'wechat';
 
         var path = '/weapp/public_html/data/'+eid+'/'+pathParameter+'/impression.js?';
         $.getJSON(path + dt.getDate() + dt.getHours(), function(base){
