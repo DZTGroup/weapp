@@ -17,23 +17,20 @@ class Entity{
      ********************************/
     // Entity type enum('intro','apartment','group','picture','reservation','impression','comment')
     private static function getEntityContent($estateId, $type, $status){
-        $db = \mysql_connect(DB_HOST, DB_USER, DB_PASS) or die("Database connect failed: ".mysql_error());
+        $db = new \PDO('mysql:host='.DB_HOST.';dbname='.DB_DATABASENAME, DB_USER, DB_PASS, array(
+                \PDO::ATTR_ERRMODE => true,
+                \PDO::ERRMODE_EXCEPTION =>true,
+            ));
 
-        \mysql_select_db(DB_DATABASENAME, $db);
-        \mysql_query("set names utf8");
+        $stmt = $db->prepare('select * from Entity where estate_id=:eid and type=:type and status=:status '
+            .'order by create_time desc limit 1');
+        $stmt->execute(array('eid'=>$estateId, 'type'=>$type, 'status'=>$status));
 
-        $result = \mysql_query('select * from Entity where estate_id='.$estateId
-            .' and type="'.$type.'" and status="'.$status.'" order by create_time desc limit 1', $db);
-
-        $json = '';
-        if ($result){
-            $tmp = \mysql_fetch_array($result);
-            $json = $tmp['content'];
+        if($stmt->rowCount() == 1){
+            return $stmt->fetch()['content'];
+        }else{
+            return '';
         }
-
-        \mysql_close($db);
-
-        return $json;
     }
 
     public static function getApprovedEntityContent($estateId, $type){

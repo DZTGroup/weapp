@@ -31,10 +31,7 @@ FCAPP.REVIEW = FCAPP.REVIEW || {
         }
         REVIEW.loadReviewList();
         REVIEW.loadProList();
-        var id = '';
-        if (window.gQuery && gQuery.id) {
-            id = gQuery.id;
-        }
+
         $(window).resize(REVIEW.resizeLayout);
         REVIEW.resizeLayout();
         FCAPP.Common.hideToolbar();
@@ -93,67 +90,65 @@ FCAPP.REVIEW = FCAPP.REVIEW || {
 	<!-- 加载评论，发送到cgi，返回json-->
     loadReviewList: function() {
         window.reviewResult = REVIEW.reviewResult;
-        
-		<!-- -->
-		/*
-        if (window.gQuery && (!gQuery.wticket || !gQuery.appid)) {
-            REVIEW.showTips(true, {
-                msg: '哎呀~出了点儿小问题，点击刷新试试吧~'
-            });
-        }*/
 		
         var data = {
             callback: 'reviewResult',
             appid: window.gQuery && gQuery.appid ? gQuery.appid: '',
-            wticket: window.gQuery && gQuery.wticket ? gQuery.wticket: '',
-            loupan_ID: window.gQuery && gQuery.loupanid ? gQuery.loupanid: '',
-            cmd: 'query',
-            platformid: 'trade',
-            funcid: 'impress',
-            countid: 4,
-            opertype: 4
+            eid: window.gQuery && gQuery.eid ? gQuery.eid: '',
+            openid: window.gQuery && gQuery.openid ? gQuery.openid: '',
+            cmd: 'get'
         };
-       // alert(data.loupan_ID);
         
         $.ajax({
-            url: '/weapp/php/cgi/ugc.php?' + $.param(data),
+            url: '/weapp/php/cgi/impression.php?' + $.param(data),
             dataType: 'jsonp'
         });
     },
     reviewResult: function(res) {
         var R = REVIEW.RUNTIME;
         // mod by aohajin
-        // TODO
-        $.getJSON('')
+        var staticUri = '/weapp/public_html/data';
+        var eid = window.gQuery && gQuery.eid ? gQuery.eid : 'default';
+        eid = eid.replace(/[<>\'\"\/\\&#\?\s\r\n]+/gi, '');
 
-        if (res.ret == 0) {
-            var total = parseInt(res.sum),
-            top = res.top,
-            user = res.user;
-            R.totalReveiw = total;
-            R.topReview = top;
-            R.userReview = user;
-            for (var i = 0,
-            il = top.length; i < il; i++) {
-                top[i].count = Math.floor(parseInt(top[i].count) * 100 / total);
+        var dt = new Date();
+        var pathParameter = window.gQuery && gQuery.openid && gQuery.openid === 0 ? 'test':'wechat';
+
+        var path = '/weapp/public_html/data/'+eid+'/'+pathParameter+'/impression.js?';
+        $.getJSON(path + dt.getDate() + dt.getHours(), function(base){
+            res.top = base.top;
+            res.sum = base.sum;
+
+            if (res.ret == 0) {
+                var total = parseInt(res.sum),
+                    top = res.top,
+                    user = res.user;
+                R.totalReveiw = total;
+                R.topReview = top;
+                R.userReview = user;
+                for (var i = 0,
+                         il = top.length; i < il; i++) {
+                    top[i].count = Math.floor(parseInt(top[i].count) * 100 / total);
+                    if ( user.id != -1 &&  top[i].content === user.content ){
+                        user.count = top[i].count;
+                    }
+                }
+
+                R.switchPanels[0].html($.template(R.review, {
+                    top: top,
+                    user: user
+                }));
+            } else {
+                var msg = '哎呀~出了点儿小问题，点击刷新试试吧~';
+                if (res.ret == -100) {
+                    msg = '哎呀~出了点儿小问题';
+                }
+                REVIEW.showTips(true, {
+                    msg: msg
+                });
             }
-            if (user.id != -1) {
-                user.count = Math.floor(parseInt(user.count) * 100 / total);
-            }
-            R.switchPanels[0].html($.template(R.review, {
-                top: top,
-                user: user
-            }));
-        } else {
-            var msg = '哎呀~出了点儿小问题，点击刷新试试吧~';
-            if (res.ret == -100) {
-                msg = '哎呀~出了点儿小问题';
-            }
-            REVIEW.showTips(true, {
-                msg: msg
-            });
-        }
-        FCAPP.Common.hideLoading();
+            FCAPP.Common.hideLoading();
+        });
     },
     
     addReview: function(id, content, cls) {

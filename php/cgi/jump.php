@@ -16,7 +16,6 @@ appid=wx520c15f417810387
 &response_type=code
 &scope=snsapi_base
 &state=123#wechat_redirect
-
  */
 /**
  * Created by PhpStorm.

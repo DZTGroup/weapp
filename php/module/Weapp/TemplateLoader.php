@@ -104,7 +104,7 @@ class TemplateLoader{
         $path = Util::getPath($this->context['estate_id']).'/'.$target;
 
         if (!file_exists($path)) {
-            mkdir($path, 0755, true);
+            mkdir($path, 0777, true);
         }
 
         $fh = fopen($path.'/'.$templateMapping['__TARGET__'], 'w');
