@@ -216,7 +216,7 @@ FCAPP.REVIEW = FCAPP.REVIEW || {
 	<!-- 添加评论，发送到cgi，返回json-->
     sendReview: function() {
         var R = REVIEW.RUNTIME,
-        id = parseInt(R.reviewId.val()),
+        //id = parseInt(R.reviewId.val()),
         review = R.inputImpress.val();
         if (0) {
         //if (isNaN(id)  || /[^\u4e00-\u9FFF]/g.test(review)) {
@@ -236,16 +236,13 @@ FCAPP.REVIEW = FCAPP.REVIEW || {
             var data = {
                 callback: 'sendReviewResult',
                 appid: window.gQuery && gQuery.appid ? gQuery.appid: '',
-                wticket: window.gQuery && gQuery.wticket ? gQuery.wticket: '',
-                loupanid: window.gQuery && gQuery.loupanid ? gQuery.loupanid: '',
-                cmd: 'add',
-                platformid: 'trade',
-                funcid: 'impress',
-                countid: 4,
-                opertype: 4,
-                content: review
+                eid: window.gQuery && gQuery.eid ? gQuery.eid: '',
+                openid: window.gQuery && gQuery.openid ? gQuery.openid: '',
+
+                cmd: 'set',
+                im: review
             };
-            if (id > 0) {
+            /*if (id > 0) {
                 data.cmd = 'update';
                 data.objid = id;
             } else {
@@ -257,10 +254,18 @@ FCAPP.REVIEW = FCAPP.REVIEW || {
                         break;
                     }
                 }
-            }
+            }*/
             R.userReviewText = review;
+            var top = R.topReview;
+            for (var i = 0,
+                     il = top.length; i < il; i++) {
+                top[i].count = Math.floor(parseInt(top[i].count) * 100 / total);
+                if ( top[i].content === review ){
+                    R._userReviewCount = top[i].count;
+                }
+            }
             $.ajax({
-                url: './review_files/ugc.php?' + $.param(data),
+                url: '/weapp/php/cgi/impression.php?' + $.param(data),
                 dataType: 'jsonp'
             });
         }
@@ -268,7 +273,7 @@ FCAPP.REVIEW = FCAPP.REVIEW || {
     sendReviewResult: function(res) {
         var R = REVIEW.RUNTIME,
         msg = '',
-        count = 1;
+        count = 0;
         R.popTips.hide();
         if (res.ret == 0) {
             R.popMask.hide();
@@ -276,7 +281,9 @@ FCAPP.REVIEW = FCAPP.REVIEW || {
             if (res.user) {
                 R.userReview = res.user;
                 R.totalReveiw += 1;
-                count = Math.floor(res.user.count * 100 / R.totalReveiw);
+                count = Math.floor(R._userReviewCount * 100 / R.totalReveiw);
+
+                R._userReviewCount = undefined;
             }
             $('#userReview').replaceClass('is_24', 'is_25');
             if (count < 1) {

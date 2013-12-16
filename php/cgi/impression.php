@@ -33,24 +33,31 @@ if($cmd == 'get'){
         $row = $stmt->fetch();
 
         $content = $row['impression'];
-        $id = $openid;
+        $id = 99;
     }
 ?>
-<?php echo $callback?>({"msg":"ok","ret":0,"user":{"content":"<?php echo $content?>","id":"<?php echo $id?>"}})
+<?php echo $callback?>({msg:"ok",ret:0,user:{content:"<?php echo $content?>",id:<?php echo $id?>}})
 <?php
 }elseif($cmd=='set'){
     $info = CustomerCache::getCustomerInfo($appid,$openid);
+
+    $ret = -100;
 
     if ($info ){
         $stmt = $db->prepare('insert into Customer_Impression (customer_id, customer_nickname, estate_id, impression) '
             .'values(:openid, :nick, :eid, :content) '
             .'on duplicate key update customer_nickname=values(customer_nickname),impression=values(impression)');
 
-        $stmt->execute(array(
+        if($stmt->execute(array(
             'openid' => $openid,
             'nick' => $info['customer_nickname'],
             'eid' => $estateId,
             'content' => $content,
-        ));
+        ))){
+            $ret = 0;
+        }
     }
+?>
+<?php echo $callback?>({ret:<?php echo $ret?>, user:{content:"<?php echo $content?>", id:99}})
+<?php
 }
