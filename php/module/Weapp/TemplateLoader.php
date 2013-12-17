@@ -38,11 +38,19 @@ class TemplateLoader{
         ),
         'impression' => array(
             '__DEFAULT__' => array(),
-            '__TEMPLATE__' => 'impression.json.php',
-            '__TARGET__' => 'impression.json',
+            '__TEMPLATE__' => 'impression.js.php',
+            '__TARGET__' => 'impression.js',
             'estate_id' => array('__CTX__', array('estate_id')),
             'sum' => array('init', 'number'),
             'impressions' => array('__OBJECT__', array('impressions')),
+        ),
+        // pic show
+        'picture' => array(
+            '__DEFAULT__' => array(),
+            '__TEMPLATE__' => 'picture.js.php',
+            '__TARGET__' => 'picture.js',
+            'estate_id' => array('__CTX__', array('estate_id')),
+            'data' => array('__OBJECT__', array()),
         ),
     );
 
@@ -104,7 +112,7 @@ class TemplateLoader{
         $path = Util::getPath($this->context['estate_id']).'/'.$target;
 
         if (!file_exists($path)) {
-            mkdir($path, 0755, true);
+            mkdir($path, 0777, true);
         }
 
         $fh = fopen($path.'/'.$templateMapping['__TARGET__'], 'w');

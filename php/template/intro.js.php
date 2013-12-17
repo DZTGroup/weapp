@@ -5,7 +5,12 @@ renderData({
     banner: 'http://www.weixinfc.com/wechat-estate/upload_files/<?php echo $estate_id;?>/<?php echo $banner_id?>',
     video: {
         pic: '',
-        vid:'<?php echo $video_id?>',
+<?php
+$vidQuery = parse_url($video_id, PHP_URL_QUERY);
+parse_str($vidQuery);
+if (! isset($vid)) $vid = '';
+?>
+        vid:'<?php echo $vid?>',
         width: '290',
         height: '217',
         title: '<?php echo $video_title?>'

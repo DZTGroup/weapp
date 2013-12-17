@@ -5,6 +5,7 @@ require_once(dirname(__FILE__)."/config.php");
 use Weapp\TemplateLoader;
 use Weapp\Util;
 use Weapp\Entity;
+use Weapp\AccessToken;
 
 $engine = new TemplateLoader(TEMPLATE_PATH);
 
@@ -20,3 +21,8 @@ $engine->render($content, 'intro', 'test');
 $content = Entity::getApprovedEntityContent(32,'impression');
 $engine->render($content, 'impression');
 
+$content = Entity::getTestEntityContent(32,'picture');
+$engine->render($content, 'picture', 'test');
+
+// test
+echo(AccessToken::getAccessToken('wx05940045fd60e0f1'));

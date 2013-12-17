@@ -22,20 +22,32 @@ class Util{
 
     // app general
     public static function getAppInfo($estateId){
-        $db = \mysql_connect(DB_HOST, DB_USER, DB_PASS) or die("Database connect failed: ".mysql_error());
+        $db = new \PDO('mysql:host='.DB_HOST.';dbname='.DB_DATABASENAME, DB_USER, DB_PASS, array(
+                \PDO::ATTR_ERRMODE => true,
+                \PDO::ERRMODE_EXCEPTION =>true,
+                \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
+            ));
 
-        \mysql_select_db(DB_DATABASENAME, $db);
-        \mysql_query("set names utf8");
+        $stmt = $db->prepare('select * from Estate where id=:eid limit 1');
+        $stmt->execute(array('eid'=>$estateId));
 
-        $result = \mysql_query('select * from Estate where id='.$estateId.' limit 1', $db);
-
-        $arr = null;
-        if ($result){
-            $arr = \mysql_fetch_array($result);
+        if($stmt->rowCount() == 1){
+            return $stmt->fetch();
         }
+    }
 
-        \mysql_close($db);
+    public static function getAppInfoByAppId($appid){
+        $db = new \PDO('mysql:host='.DB_HOST.';dbname='.DB_DATABASENAME, DB_USER, DB_PASS, array(
+                \PDO::ATTR_ERRMODE => true,
+                \PDO::ERRMODE_EXCEPTION =>true,
+                \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
+            ));
 
-        return $arr;
+        $stmt = $db->prepare('select * from Estate where app_id=:appid limit 1');
+        $stmt->execute(array('appid'=>$appid));
+
+        if($stmt->rowCount() == 1){
+            return $stmt->fetch();
+        }
     }
 }

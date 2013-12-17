@@ -31,10 +31,7 @@ FCAPP.REVIEW = FCAPP.REVIEW || {
         }
         REVIEW.loadReviewList();
         REVIEW.loadProList();
-        var id = '';
-        if (window.gQuery && gQuery.id) {
-            id = gQuery.id;
-        }
+
         $(window).resize(REVIEW.resizeLayout);
         REVIEW.resizeLayout();
         FCAPP.Common.hideToolbar();
@@ -93,53 +90,61 @@ FCAPP.REVIEW = FCAPP.REVIEW || {
 	<!-- 加载评论，发送到cgi，返回json-->
     loadReviewList: function() {
         window.reviewResult = REVIEW.reviewResult;
-        
-		<!-- -->
-		/*
-        if (window.gQuery && (!gQuery.wticket || !gQuery.appid)) {
-            REVIEW.showTips(true, {
-                msg: '哎呀~出了点儿小问题，点击刷新试试吧~'
-            });
-        }*/
 		
         var data = {
             callback: 'reviewResult',
             appid: window.gQuery && gQuery.appid ? gQuery.appid: '',
-            wticket: window.gQuery && gQuery.wticket ? gQuery.wticket: '',
-            loupan_ID: window.gQuery && gQuery.loupanid ? gQuery.loupanid: '',
-            cmd: 'query',
-            platformid: 'trade',
-            funcid: 'impress',
-            countid: 4,
-            opertype: 4
+            eid: window.gQuery && gQuery.eid ? gQuery.eid: 'default',
+            openid: window.gQuery && gQuery.openid ? gQuery.openid: '',
+            cmd: 'get'
         };
-       // alert(data.loupan_ID);
         
         $.ajax({
-            url: '/weapp/php/cgi/ugc.php?' + $.param(data),
+            url: '/weapp/php/cgi/impression.php?' + $.param(data),
             dataType: 'jsonp'
         });
     },
     reviewResult: function(res) {
+        window.renderReviewResult = REVIEW.renderReviewResult;
         var R = REVIEW.RUNTIME;
-        // mod by aohajin
-        // TODO
-        $.getJSON('')
+        R.userReview = res;
 
-        if (res.ret == 0) {
+        // mod by aohajin
+        var staticUri = '/weapp/public_html/data';
+        var eid = window.gQuery && gQuery.eid ? gQuery.eid : 'default';
+        eid = eid.replace(/[<>\'\"\/\\&#\?\s\r\n]+/gi, '');
+
+        var dt = new Date();
+        var pathParameter = window.gQuery && gQuery.openid && gQuery.openid == 0 ? 'test':'wechat';
+
+        var path = '/weapp/public_html/data/'+eid+'/'+pathParameter+'/impression.js?';
+
+        $.ajax({
+            url: path + dt.getDate() + dt.getHours(),
+            dataType: 'jsonp'
+        });
+    },
+    renderReviewResult: function(base){
+        var R = REVIEW.RUNTIME;
+        var res = R.userReview;
+        res.top = base.top;
+        res.sum = base.sum;
+
+        if (res.ret == 0 && res.top.length > 0) {
             var total = parseInt(res.sum),
-            top = res.top,
-            user = res.user;
+                top = res.top,
+                user = res.user;
             R.totalReveiw = total;
             R.topReview = top;
             R.userReview = user;
             for (var i = 0,
-            il = top.length; i < il; i++) {
+                     il = top.length; i < il; i++) {
                 top[i].count = Math.floor(parseInt(top[i].count) * 100 / total);
+                if ( user.id != -1 &&  top[i].content === user.content ){
+                    user.count = top[i].count;
+                }
             }
-            if (user.id != -1) {
-                user.count = Math.floor(parseInt(user.count) * 100 / total);
-            }
+
             R.switchPanels[0].html($.template(R.review, {
                 top: top,
                 user: user
@@ -155,7 +160,6 @@ FCAPP.REVIEW = FCAPP.REVIEW || {
         }
         FCAPP.Common.hideLoading();
     },
-    
     addReview: function(id, content, cls) {
         var R = REVIEW.RUNTIME;
         if (R.userReview.id > 0) {
@@ -212,7 +216,7 @@ FCAPP.REVIEW = FCAPP.REVIEW || {
 	<!-- 添加评论，发送到cgi，返回json-->
     sendReview: function() {
         var R = REVIEW.RUNTIME,
-        id = parseInt(R.reviewId.val()),
+        //id = parseInt(R.reviewId.val()),
         review = R.inputImpress.val();
         if (0) {
         //if (isNaN(id)  || /[^\u4e00-\u9FFF]/g.test(review)) {
@@ -232,16 +236,13 @@ FCAPP.REVIEW = FCAPP.REVIEW || {
             var data = {
                 callback: 'sendReviewResult',
                 appid: window.gQuery && gQuery.appid ? gQuery.appid: '',
-                wticket: window.gQuery && gQuery.wticket ? gQuery.wticket: '',
-                loupanid: window.gQuery && gQuery.loupanid ? gQuery.loupanid: '',
-                cmd: 'add',
-                platformid: 'trade',
-                funcid: 'impress',
-                countid: 4,
-                opertype: 4,
-                content: review
+                eid: window.gQuery && gQuery.eid ? gQuery.eid: '',
+                openid: window.gQuery && gQuery.openid ? gQuery.openid: '',
+
+                cmd: 'set',
+                im: review
             };
-            if (id > 0) {
+            /*if (id > 0) {
                 data.cmd = 'update';
                 data.objid = id;
             } else {
@@ -253,10 +254,17 @@ FCAPP.REVIEW = FCAPP.REVIEW || {
                         break;
                     }
                 }
-            }
+            }*/
             R.userReviewText = review;
+            var top = R.topReview;
+            for (var i = 0,
+                     il = top.length; i < il; i++) {
+                if ( top[i].content === review ){
+                    R._userReviewCount = top[i].count;
+                }
+            }
             $.ajax({
-                url: './review_files/ugc.php?' + $.param(data),
+                url: '/weapp/php/cgi/impression.php?' + $.param(data),
                 dataType: 'jsonp'
             });
         }
@@ -264,7 +272,7 @@ FCAPP.REVIEW = FCAPP.REVIEW || {
     sendReviewResult: function(res) {
         var R = REVIEW.RUNTIME,
         msg = '',
-        count = 1;
+        count = 0;
         R.popTips.hide();
         if (res.ret == 0) {
             R.popMask.hide();
@@ -272,7 +280,9 @@ FCAPP.REVIEW = FCAPP.REVIEW || {
             if (res.user) {
                 R.userReview = res.user;
                 R.totalReveiw += 1;
-                count = Math.floor(res.user.count * 100 / R.totalReveiw);
+                count = Math.floor(R._userReviewCount * 100 / R.totalReveiw);
+
+                R._userReviewCount = undefined;
             }
             $('#userReview').replaceClass('is_24', 'is_25');
             if (count < 1) {
