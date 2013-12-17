@@ -26,7 +26,7 @@ $.getJSON("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&
                             {
                                 "name" : "十里画册",
                                 "type" : "view",
-                                "url" : "http://112.124.55.78/weixinfc/test/picshow.html?id=10014"
+                                "url" : "http://www.weixinfc.com/weapp/php/cgi/jump.php?eid=32&appid=wx05940045fd60e0f1&t=picture"
                             },
                             {
                                 "name" : "360全景户型",
@@ -43,7 +43,7 @@ $.getJSON("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&
                     {
                         "name" : "楼盘实景",
                         "type" : "view",
-                        "url" : "http://112.124.55.78/loupan/picwall.html"
+                        "url" : "http://www.weixinfc.com/wechat-estate/index.php?r=userpicwall/list&estate_id=32"
                     },
                     {
                         "name" : "会员服务",
