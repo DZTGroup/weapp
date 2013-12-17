@@ -30,7 +30,6 @@ $token = $ticket['access_token'];
 
 $query = http_build_query(array('appid'=>$appid, 'eid'=>$eid, 'openid'=>$openid));
 
-//TODO type-name mapping
-$url = 'http://'.$_SERVER['SERVER_NAME'].'/weapp/public_html/html/'.$t.'.html?'.$query;
+$url = 'http://'.$_SERVER['SERVER_NAME'].$typeMapping[$t].$query;
 \error_log('[debug]jump to '.$url);
 header( 'Location: '.$url );
