@@ -43,15 +43,15 @@ $.getJSON("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&
                     {
                         "name" : "楼盘实景",
                         "type" : "view",
-                        "url" : "http://112.124.55.78/loupan/picwall.html"
+                        "url" : "http://www.weixinfc.com/wechat-estate/index.php?r=userpicwall/list&estate_id=32"
                     },
                     {
                         "name" : "会员服务",
                         "sub_button" : [
                             {
-                                "name" : "狮子湖论坛",
+                                "name" : "论坛",
                                 "type" : "view",
-                                "url" : "http://www.weixinfc.com/loupan/post/bbs-list.html"
+                                "url" : "http://www.weixinfc.com/wechat-estate/index.php?r=post/list&estate_id=32"
                             },
                             {
                                 "name" : "狮子湖",
