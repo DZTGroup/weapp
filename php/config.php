@@ -19,7 +19,7 @@ define('WECHAT_REDIRECT', 'https://open.weixin.qq.com/connect/oauth2/authorize')
 
 $typeMapping = array(
     'intro'=>'/weapp/public_html/html/intro.html?',
-    'impression'=>'/weapp/public_html/html/intro.html?',
+    'impression'=>'/weapp/public_html/html/impression.html?',
     'picture'=>'/weapp/public_html/html/picture.html?',
     'group'=>'/weapp/public_html/html/group.html?',
     'bbs'=>'/wechat-estate/index.php?r=post/list&',

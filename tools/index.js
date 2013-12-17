@@ -49,9 +49,9 @@ $.getJSON("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&
                         "name" : "会员服务",
                         "sub_button" : [
                             {
-                                "name" : "狮子湖论坛",
+                                "name" : "论坛",
                                 "type" : "view",
-                                "url" : "http://www.weixinfc.com/loupan/post/bbs-list.html"
+                                "url" : "http://www.weixinfc.com/weapp/php/cgi/jump.php?eid=32&appid=wx05940045fd60e0f1&t=bbs"
                             },
                             {
                                 "name" : "狮子湖",
