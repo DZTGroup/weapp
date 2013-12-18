@@ -4,15 +4,14 @@ FCAPP.APPLY = {
         Error: {
             '-100': '提交超时,请重新报名',
             '-101': '请先关注该公共帐号',
+            '-102': '不存在的看房团',
             '-411': '请正确输入手机号',
             '-414': '请输入您的姓名',
             '-445': '请正确选择报名人数',
             '-446': '请正确选择出发地点',
             '-1401': '您已经报名了，请不要重复报名'
         },
-        Server: './cgi-bin/house_manager.php',
-        State:  '',
-        qrcode: 'n13551178921362'
+        Server: '/weapp/php/cgi/group.php'
     },
     RUNTIME: {},
     init: function() {
@@ -36,7 +35,9 @@ FCAPP.APPLY = {
         }
         APPLY.restoreData();
         APPLY.loadInfo();
-        APPLY.getUserState();
+        // mod by aohain
+        // not needed in new design.
+        //APPLY.getUserState();
         APPLY.initEvents();
         if (window.gQuery && gQuery.qrcode) {
             C.qrcode = gQuery.qrcode.replace(/[^a-z0-9]/gi, '');
@@ -62,14 +63,17 @@ FCAPP.APPLY = {
     },
 	//
     loadInfo: function() {
-        //var datafile = window.gQuery && gQuery.id ? gQuery.id + '.': '',
-        var dt = new Date();
-        //datafile = datafile.replace(/[<>\'\"\/\\&#\?\s\r\n]+/gi, '');
-        //datafile += 'apply.js?';
+        //callback
         window.loadInfoResult = APPLY.loadInfoResult;
+        var eid = window.gQuery && gQuery.eid ? gQuery.eid : 'default',
+            dt = new Date();
+        eid = eid.replace(/[<>\'\"\/\\&#\?\s\r\n]+/gi, '');
+
+        var pathParameter = window.gQuery && gQuery.openid && gQuery.openid == 0 ? 'test':'wechat';
+        // mod by aohajin
+        var path = '/weapp/public_html/data/'+eid+'/'+pathParameter+'/group.js?';
         $.ajax({
-            //url: './static/' + datafile + dt.getDate() + dt.getHours(),
-            url: '../group.js',
+            url: path + dt.getDate() + dt.getHours(),
             dataType: 'jsonp',
             error: function() {
                 FCAPP.Common.msg(true, {
@@ -86,8 +90,10 @@ FCAPP.APPLY = {
         APPLY.renderInfo(res.rules, R.actRule);
         APPLY.checkTime(res.startTime, res.endTime);
         FCAPP.Common.hideLoading();
+        R.openID = window.gQuery && gQuery.openid ? gQuery.openid : '0';
         R.issue = res.issue;
         R.house = res.ads.strong;
+        isApply();
     },
     renderApplyTips: function(data) {
         var R = APPLY.RUNTIME,
@@ -232,10 +238,10 @@ FCAPP.APPLY = {
         if (window.gQuery && gQuery.ts && /^\d+$/.test(gQuery.ts)) {
             now = gQuery.ts;
         }
-        if (/^\d{4}\-\d{2}\-\d{2} \d{2}:\d{2}:\d{2}$/.test(stime)) {
+        if (/^\d{4}\-\d{2}\-\d{2} (\d{2}|\d{1}):\d{2}:\d{2}$/.test(stime)) {
             stime = Math.floor(new Date(stime.replace(/\-/gi, '/')).getTime() / 1000);
         }
-        if (/^\d{4}\-\d{2}\-\d{2} \d{2}:\d{2}:\d{2}$/.test(etime)) {
+        if (/^\d{4}\-\d{2}\-\d{2} (\d{2}|\d{1}):\d{2}:\d{2}$/.test(etime)) {
             etime = Math.floor(new Date(etime.replace(/\-/gi, '/')).getTime() / 1000);
         }
         if (now < stime) {
@@ -304,17 +310,20 @@ FCAPP.APPLY = {
     applyAction: function(info, callback) {
         var R = APPLY.RUNTIME,
         data = {
-			groupid: window.gQuery && gQuery.id ? gQuery.id :'',
             appid: window.gQuery && gQuery.appid ? gQuery.appid: '',
-            wticket: window.gQuery && gQuery.wticket ? gQuery.wticket: '',
-            house: R.house || ''
+            eid: window.gQuery && gQuery.eid ? gQuery.eid: 'default',
+            openid: window.gQuery && gQuery.openid ? gQuery.openid: ''
+            //house: R.house || ''
         };
+
         for (var i in info) {
             data[i] = info[i].replace(/[<>\'\"]+/gi, '');
         }
-        if (window.gQuery && gQuery.debug == 1) {
+        data['gid'] = R.issue;
+
+        if (window.gQuery && gQuery.openid == 0) {
             FCAPP.Common.msg(true, {
-                msg: '预览模式禁止报名'
+                msg: '预览模式'
             });
             return;
         }
@@ -322,7 +331,7 @@ FCAPP.APPLY = {
     },
     save: function(data) {
         var C = APPLY.CONFIG;
-        data.cmd = 100;
+        data.cmd = 'apply';
         data.callback = 'saveResult';
         window.saveResult = APPLY.saveResult;
 		
@@ -353,6 +362,13 @@ FCAPP.APPLY = {
             });
         } else if (data.ret == -1401) {
             R.applyBox.hide();
+            var cb = function() {};
+            if (data.ret in C.Error) {
+                FCAPP.Common.msg(true, {
+                    msg: C.Error[data.ret],
+                    ok: cb
+                });
+            }
             APPLY.showResult({
                 state: 'smile',
                 title: '您已经报名成功!',
@@ -361,11 +377,6 @@ FCAPP.APPLY = {
         } else {
             var cb = function() {};
             if (data.ret in C.Error) {
-                if (data.ret == -100) {
-                    cb = function() {
-                        location.href = "http://meishi.qq.com/qr/" + C.qrcode + '#wechat_redirect';
-                    };
-                }
                 FCAPP.Common.msg(true, {
                     msg: C.Error[data.ret],
                     ok: cb

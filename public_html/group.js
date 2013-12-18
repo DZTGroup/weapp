@@ -1,15 +1,15 @@
 ﻿loadInfoResult({
     "issue": "0",
-    "startTime": "2013-09-16 12:00:00",
+    "startTime": "2013-12-20 12:00:00",
     "endTime": "2013-12-31 17:00:00",
-    "banner": "",
+    "banner": "http://www.weixinfc.com/weixinfc/test/apply_files/img/0.jpg",
     "lines": [{
         "value": "深大地铁站-2龙山",
         "text":  "深大地铁站-2龙山山"
     }],
     "ads": {
         "strong": "购房享折上折",
-        "msg": "",
+        "msg": "hi!",
         "tips": "距本次报名截至还有:"
     },
     "rules": [
