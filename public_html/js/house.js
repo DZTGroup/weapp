@@ -32,7 +32,8 @@ FCAPP.HOUSE.List = {
         datafile = datafile.replace(/[<>\'\"\/\\&#\?\s\r\n]+/gi, '');
         datafile += 'rooms.js?';
         $.ajax({
-            url: '../../building/' + loupanid +'/'+ datafile + dt.getDate() + dt.getHours(),
+            //url: '../../building/' + loupanid +'/'+ datafile + dt.getDate() + dt.getHours(),
+            url: '../js/'+datafile + dt.getDate() + dt.getHours(),
             dataType: 'jsonp',
             error: function() {
                 FCAPP.Common.msg(true, {

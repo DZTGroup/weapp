@@ -376,8 +376,8 @@ var FCAPP = FCAPP || {
             var dt = new Date();
             id = (id + '').replace(/[<>\'\"\/\\&#\?\s\r\n]+/gi, '');
             $.ajax({
-               /* url: 'http://trade.qq.com/fangchan/static/' + (id.length ? id + '.' : '') + 'sharedata.js?' + dt.getMonth() + dt.getDate(),  */           /* todo 数据文件 更改URL */
-				url: 'share_data.js?',
+                //url: 'http://trade.qq.com/fangchan/static/' + (id.length ? id + '.' : '') + '../js/sharedata.js?' + dt.getMonth() + dt.getDate(),           /* todo 数据文件 更改URL */
+				url: '../js/sharedata.js?',
                 dataType: 'jsonp'
             });
         },
