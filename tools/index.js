@@ -6,13 +6,13 @@ $.getJSON("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&
         console.log(token)
 
         // menu getting
-        /*
+        
          $.getJSON("https://api.weixin.qq.com/cgi-bin/menu/get?access_token="+token, function(menu){
          console.log(AhjTools.DumpObjectIndented(menu));
-         })*/
+         })
 
         // menu updating
-        $.post("https://api.weixin.qq.com/cgi-bin/menu/create?access_token="+token,
+        /*$.post("https://api.weixin.qq.com/cgi-bin/menu/create?access_token="+token,
             JSON.stringify({
                 "button" : [
                     {
@@ -51,7 +51,7 @@ $.getJSON("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&
                             {
                                 "name" : "论坛",
                                 "type" : "view",
-                                "url" : "http://www.weixinfc.com/wechat-estate/index.php?r=post/list&estate_id=32"
+                                "url" : "http://www.weixinfc.com/wechat-estate/index.php?r=post/list&eid=32&appid=wx05940045fd60e0f1&openid=ox-O7jhby2CLVCaARx7xDglZm7Xc"
                             },
                             {
                                 "name" : "狮子湖",
@@ -78,5 +78,5 @@ $.getJSON("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&
                 ]
             }), function(rt){
                 console.log(rt)
-            })
+            })*/
     })
