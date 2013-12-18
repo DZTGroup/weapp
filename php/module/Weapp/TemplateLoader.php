@@ -52,6 +52,21 @@ class TemplateLoader{
             'estate_id' => array('__CTX__', array('estate_id')),
             'data' => array('__OBJECT__', array()),
         ),
+        // visit group
+        'group' => [
+            '__DEFAULT__' => array(),
+            '__TEMPLATE__' => 'group.js.php',
+            '__TARGET__' => 'group.js',
+            'estate_id' => array('__CTX__', array('estate_id')),
+            'groupId' => array('__CTX__', array('group_id')),
+            'startDate' => array('event', 'sign_end_date'),
+            'startTime' => array('event', 'sign_end_time'),
+            'endDate' => array('event', 'watch_end_date'),
+            'endTime' => array('event', 'watch_end_time'),
+            'routes' => array('__OBJECT__',array('lines')),
+            'cookies' => array('__SPLIT__', array('event', 'discount')),
+            'announcement' => array('__SPLIT__', array('event', 'announce')),
+        ],
     );
 
     public function __construct($includePath) {
@@ -74,7 +89,10 @@ class TemplateLoader{
         $templateMapping = $this->templateMapping[$type];
         if ($templateMapping == NULL) throw new \Exception('Type '.$type.' not found.');
 
-        $data = json_decode($content, true);
+        $obj = json_decode($content, true);
+        $this->context['entity_id'] = $obj['entity_id'];
+        $this->context['group_id'] = $obj['group_id'];
+        $data = $obj['content'];
 
         $templateValues = array();
         foreach($templateMapping as $key => $value){

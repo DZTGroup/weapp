@@ -28,7 +28,9 @@ class Entity{
         $stmt->execute(array('eid'=>$estateId, 'type'=>$type, 'status'=>$status));
 
         if($stmt->rowCount() == 1){
-            return $stmt->fetch()['content'];
+            $row = $stmt->fetch();
+            $contentWrapper = '{"entity_id":'.$row['id'].', "group_id":'.$row['group_id'].', "content":'.$row['content'].'}';
+            return $contentWrapper;
         }else{
             return '';
         }

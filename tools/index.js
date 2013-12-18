@@ -7,12 +7,12 @@ $.getJSON("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&
 
         // menu getting
         
-         $.getJSON("https://api.weixin.qq.com/cgi-bin/menu/get?access_token="+token, function(menu){
+         /*$.getJSON("https://api.weixin.qq.com/cgi-bin/menu/get?access_token="+token, function(menu){
          console.log(AhjTools.DumpObjectIndented(menu));
-         })
+         })*/
 
         // menu updating
-        /*$.post("https://api.weixin.qq.com/cgi-bin/menu/create?access_token="+token,
+        $.post("https://api.weixin.qq.com/cgi-bin/menu/create?access_token="+token,
             JSON.stringify({
                 "button" : [
                     {
@@ -51,7 +51,7 @@ $.getJSON("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&
                             {
                                 "name" : "论坛",
                                 "type" : "view",
-                                "url" : "http://www.weixinfc.com/wechat-estate/index.php?r=post/list&eid=32&appid=wx05940045fd60e0f1&openid=ox-O7jhby2CLVCaARx7xDglZm7Xc"
+                                "url" : "http://www.weixinfc.com/weapp/php/cgi/jump.php?eid=32&appid=wx05940045fd60e0f1&t=bbs"
                             },
                             {
                                 "name" : "狮子湖",
@@ -61,7 +61,7 @@ $.getJSON("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&
                             {
                                 "name" : "看房团",
                                 "type" : "view",
-                                "url" : "http://112.124.55.78/weixinfc/test/apply.html?id=10003.10001"
+                                "url" : "http://www.weixinfc.com/weapp/php/cgi/jump.php?eid=32&appid=wx05940045fd60e0f1&t=group"
                             },
                             {
                                 "name" : "我的认筹",
@@ -78,5 +78,5 @@ $.getJSON("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&
                 ]
             }), function(rt){
                 console.log(rt)
-            })*/
+            })
     })
