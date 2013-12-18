@@ -1,5 +1,8 @@
+.idea
+*.log
+.DS_Store
+
 php/vendor/*
 php/composer.lock
 tools/node_modules/*
-
 public_html/data/*
