@@ -63,9 +63,8 @@ loadYTListData: function () {
     }
     },
     goDetail: function (id) {
-    id = id || '';
     FCAPP.Common.jumpTo('ad-detail.html', {
-                      ytid: id,
+                      idx: id,
                       from: "advertise.html"
                       }, true);
     }
