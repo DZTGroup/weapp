@@ -33,8 +33,6 @@ $query = http_build_query(array('appid'=>$appid, 'eid'=>$eid, 'openid'=>$openid)
 
 $url = 'http://'.$_SERVER['SERVER_NAME'].$typeMapping[$t].$query;
 
-Statistic::update($eid,$openid,$t);
-
 $filename = '../../../log/statistic';
 $log_str =$eid.'|'.$openid.'|'.$t.'|'.date('Ymd').'|'.date("H:i:s");
 
