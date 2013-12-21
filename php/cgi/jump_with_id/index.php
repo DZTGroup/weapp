@@ -4,7 +4,6 @@ require_once(dirname(__FILE__)."/../../config.php");
 
 
 use Weapp\Util;
-use Weapp\Statistic;
 /**
  * Created by PhpStorm.
  * User: aohajin
@@ -35,6 +34,13 @@ $query = http_build_query(array('appid'=>$appid, 'eid'=>$eid, 'openid'=>$openid)
 $url = 'http://'.$_SERVER['SERVER_NAME'].$typeMapping[$t].$query;
 
 Statistic::update($eid,$openid,$t);
+
+$filename = '../../../log/statistic';
+$log_str =$eid.'|'.$openid.'|'.$t.'|'.date('Ymd').'|'.date("H:i:s");
+
+$fh = fopen($filename, "a");
+fwrite($fh, $log_str);
+fclose($fh);
 
 \error_log('[debug]jump to '.$url);
 header( 'Location: '.$url );
