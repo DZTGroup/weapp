@@ -34,7 +34,7 @@ $query = http_build_query(array('appid'=>$appid, 'eid'=>$eid, 'openid'=>$openid)
 
 $url = 'http://'.$_SERVER['SERVER_NAME'].$typeMapping[$t].$query;
 
-Statistic::update($eid,$openid,$typeMapping[$t]);
+Statistic::update($eid,$openid,$t);
 
 \error_log('[debug]jump to '.$url);
 header( 'Location: '.$url );
