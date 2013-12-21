@@ -5,7 +5,7 @@ FCAPP.YTDetail = FCAPP.YTDetail || {
     },
     init: function () {
         var R = YTDetail.RUNTIME;
-        if (!window.gQuery && !gQuery.id) {
+        if (!window.gQuery || !gQuery.idx) {
             setTimeout(arguments.callee, 200);
             return;
         }
@@ -43,6 +43,25 @@ FCAPP.YTDetail = FCAPP.YTDetail || {
     },
     loadYTDetailData: function () {
         window.renderData = YTDetail.renderData;
+
+        var eid = window.gQuery && gQuery.eid ? gQuery.eid : 'default',
+            idx = window.gQuery && gQuery.idx ? gQuery.idx : 'default',
+            dt = new Date();
+        eid = eid.replace(/[<>\'\"\/\\&#\?\s\r\n]+/gi, '');
+        var pathParameter = window.gQuery && gQuery.openid && gQuery.openid == 0 ? 'test':'wechat';
+        // mod by aohajin
+        var path = '/weapp/public_html/data/'+eid+'/'+pathParameter+'/sub-ad.'+idx+'.js?';
+        $.ajax({
+            url: path + dt.getDate() + dt.getHours(),
+            dataType: 'jsonp',
+            error: function() {
+                FCAPP.Common.msg(true, {
+                    msg: '无效数据'
+                });
+            }
+        });
+
+        /*
         var datafile = window.gQuery && gQuery.ytid ? gQuery.ytid + '.' : '',
             dt = new Date();
         datafile = datafile.replace(/[<>\'\"\/\\&#\?\s\r\n]+/gi, '');
@@ -50,7 +69,7 @@ FCAPP.YTDetail = FCAPP.YTDetail || {
         $.ajax({
             url: '../' + datafile + dt.getDate() + dt.getHours(),
             dataType: 'jsonp'
-        });
+        });*/
     },
     renderData: function (data) {
         var R = YTDetail.RUNTIME,

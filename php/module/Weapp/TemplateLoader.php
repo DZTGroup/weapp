@@ -75,7 +75,7 @@ class TemplateLoader{
             'estate_id' => array('__CTX__', array('estate_id')),
 
             //TODO
-            //'title' => array(),
+            'title' => array('intro', 'title'),
             'desc' => array('intro', 'desc'),
             'banner_id' => array('intro', 'img'),
             'ads' => array('__OBJECT__', array('list')),
@@ -85,8 +85,11 @@ class TemplateLoader{
 
         'sub_advertise' => array(
             '__DEFAULT__' => array(),
-            '__TEMPLATE__' => 'ad.js.php',
-            '__TARGET__' => 'ad.js',
+            '__TEMPLATE__' => 'sub-ad.js.php',
+            '__TARGET__' => 'sub-ad.%index%.js',
+
+            'id' => array('__CTX__', array('index')),
+            'intro' => array('__OBJECT__', array('intro')),
         ),
     );
 
@@ -94,8 +97,12 @@ class TemplateLoader{
         $this->engine = Engine::create($includePath);
     }
 
-    private function decorateTemplateValue($value){
+    private function decorateTemplateValue($tvalue){
+        foreach($this->context as $key => $value){
+            $tvalue = preg_replace('/%'.$key.'%/', $value, $tvalue);
+        }
 
+        return $tvalue;
     }
 
     public function setUpContext($estateId, $name, $appId, $appKey, $wechatId){
@@ -108,16 +115,18 @@ class TemplateLoader{
         );
     }
 
-    public function render($content, $type, $target='wechat'){
+    public function render($content, $type, $target='wechat', $is_root = true){
         if ($this->context == NULL) throw new \Exception('Call setUpContext before render.');
 
         $templateMapping = $this->templateMapping[$type];
         if ($templateMapping == NULL) throw new \Exception('Type '.$type.' not found.');
 
-        $obj = json_decode($content, true);
-        $this->context['entity_id'] = $obj['entity_id'];
-        $this->context['group_id'] = $obj['group_id'];
-        $data = $obj['content'];
+        $data = json_decode($content, true);
+        if( $is_root ){
+            $this->context['entity_id'] = $data['entity_id'];
+            $this->context['group_id'] = $data['group_id'];
+            $data = $data['content'];
+        }
 
         $templateValues = array();
         foreach($templateMapping as $key => $value){
@@ -130,9 +139,10 @@ class TemplateLoader{
                     $index = 0;
                     foreach($arr as $item){
                         $this->context['index'] = $index;
-                        $this->render(json_encode($item), $value[0], $target);
+                        $this->render(json_encode($item), $value[0], $target, false);
                         $index ++;
                     }
+                    unset($this->context['index']);
                 }
             }else{
                 $head = $value[0];
@@ -162,7 +172,7 @@ class TemplateLoader{
             }
         }
 
-        $text = $this->engine->render($templateMapping['__TEMPLATE__'], $templateValues);
+        $text = $this->engine->render($this->decorateTemplateValue($templateMapping['__TEMPLATE__']), $templateValues);
 
         /*
          * file output
@@ -174,7 +184,7 @@ class TemplateLoader{
             mkdir($path, 0777, true);
         }
 
-        $fh = fopen($path.'/'.$templateMapping['__TARGET__'], 'w');
+        $fh = fopen($path.'/'.$this->decorateTemplateValue($templateMapping['__TARGET__']), 'w');
         fwrite($fh, $text);
         fclose($fh);
 
