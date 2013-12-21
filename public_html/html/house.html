@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="房地产-微生活" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="white" />
+<script src="../js/cdn_djl.js" type="text/javascript" async></script>
+<script type="text/javascript">
+    var search = location.search,
+        star = search.indexOf('title='),
+        end = search.indexOf('&',star),
+        title = '户型列表-微生活';
+    if(end==-1){
+        end = search.length;
+    }
+    if(star != -1){
+        title = search.substring(star+6,end)
+    }
+    try{title = decodeURIComponent(title);}catch(e){}
+    title = title.replace(/[<>]/gi,'');
+    document.write("<title>"+title+"</title>");
+</script>
+<title>户型欣赏</title>
+<link href="../css/style.css?ver=2.3" rel="stylesheet" />
+</head>
+<body>
+ <div class="wrapper" id="container">
+ 	<!-- start -->
+ 	<div class="act_top" id="actTop">
+ 	  <div class="act_top_show">
+ 	  	 <img src="../img/im_1440260.jpg" width="720" height="130" id="bannerPic">
+ 	  </div>
+ 	</div>
+ 	<div id="roomDetails">
+ 	  </div>
+ 	  <p>&nbsp</p>
+ 	  <!-- end -->
+ 	  </div>
+ 	  <div class="pop_tips" id="popTips" style="display:none;">
+ 	   <div class="oval"></div>
+ 	   <div class="pop_show">
+ 	    <h4 id="tipsTitle">温馨提示</h4>
+ 	    <div class="pop_info" id="tipsMsg">
+ 	     <p></p>
+ 	    </div>
+ 	    <div class="pop_btns">
+ 	       <a href="javascript:void(0);" id="tipsOK">确定</a>
+ 	       <a href="javascript:void(0);" style="display:none" id="tipsCancel">取消</a>
+ 	    </div>
+ 	   </div>
+ 	  </div>
+ 	  <div id="popFail" style="display:none;" jqmoldstyle="block">
+ 	   <div class="bk"></div>
+ 	   <div class="cont">
+ 	     <img src="">
+ 	   </div>
+ 	  </div>
+ 	  <!-- 户型简介 start -->
+ 	  <script type="text/template" id="template">		
+<%
+var isIOS = /Mac OS/i.test(navigator.userAgent);
+for(var idx=0,idxLen=data.length;idx<idxLen; idx++){
+    var rooms =data[idx].rooms,
+        len = rooms.length,
+        style = '';
+        boxCls = ' box_up';
+    if(len<=4){
+        boxCls += ' box_up'+len;
+    }
+    if(len<=4&&idx==0){
+        style = ' style=" height:auto;"';
+    }
+%>
+<div class="box<%=boxCls%>" id="box<%=idx%>">
+    <h3><%=data[idx].key%></h3>
+    <div class="box_type"<%=style%>>
+        <ul class="house_type">
+            <%for(var j=0,jl=len;j<jl;j++){ %>
+            <li id="boxLi<%=rooms[j].id%>"<%if(j==0&&idx==0){%> class="current"<%}%>>
+                <a href="javascript:void(0);" onclick="List.toggleList(<%=rooms[j].id%>,<%=idx%>);">
+                    <strong><%=rooms[j].name%></strong>
+                    <span><%=rooms[j].desc%></span>
+                    <em><%=rooms[j].rooms%> <%=rooms[j].area%></em>
+                </a>
+                <div class="house_photo<%if(j==0&&idx==0){%> house_arrow<%}%>"<%if(j!=0||idx!=0){%> style="display:none;"<%}%>>
+                    <a href="javascript:void(0);" onclick="List.showDetail(<%=rooms[j].id%>);return false;" class="ico_type">户型图</a>
+                    <% if(rooms[j].full3d&&rooms[j].full3d.length){ %><a href="javascript:void(0);" onclick="List.show3D(<%=rooms[j].id%>);return false;" class="ico_360">全景图</a><%}%>
+                </div>
+            </li>
+            <% } /* end of for j rooms.length */ %>
+        </ul>
+    </div>
+    <%if((idx==0&&len>3)||(idx>0&&len>4)){%>
+    <a href="javascript:void(0);" onclick="List.switchList(this,<%=rooms.length%>,<%=idx%>);return false;" class="btn_more">
+        <span>查看全部户型(<%=rooms.length%>)</span>
+    </a>
+    <% } %>
+</div>
+<% } /*end of for desc in categories */ %>
+ 	  </script>
+ 	  <script type="text/javascript" src="../js/share.js?max_age=864000"></script>
+	  <script type="text/javascript" src="http://imgcache.qq.com/c/=/club/life/trade/libs/jq.mobi.js,/club/life/trade/libs/jq.template.js,/club/life/trade/libs/iscroll.js,/club/life/trade/weixin/share.js?max_age=864000"></script>
+ 	  <script type="text/javascript" src="../js/common.js?ver=2.4.6"></script>
+ 	  <script type="text/javascript" src="../js/house.js?ver=2.4"></script>
+ 	  </body>
+ 	</html>

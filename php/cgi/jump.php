@@ -9,7 +9,7 @@ require_once(dirname(__FILE__) . "/../config.php");
  */
 $estateId = $_GET["eid"];
 $appid = $_GET["appid"];
-$type = $_get["t"];
+$type = $_GET["t"];
 
 $state = rawurlencode($_SERVER['QUERY_STRING']);
 $redirect = rawurlencode(CGI_URI.'/jump_with_id');
