@@ -28,15 +28,22 @@ initEvents: function () {
 },
 loadYTListData: function () {
     window.renderData = YTList.renderData;
-    var datafile = "",
-    dt = new Date();
-    datafile = datafile.replace(/[<>\'\"\/\\&#\?\s\r\n]+/gi, '');
-    datafile += '../js/yt-data.js?';
+    var eid = window.gQuery && gQuery.eid ? gQuery.eid : 'default',
+        dt = new Date();
+    eid = eid.replace(/[<>\'\"\/\\&#\?\s\r\n]+/gi, '');
+    var pathParameter = window.gQuery && gQuery.openid && gQuery.openid == 0 ? 'test':'wechat';
+    // mod by aohajin
+    var path = '/weapp/public_html/data/'+eid+'/'+pathParameter+'/ad.js?';
     $.ajax({
-         url: '' + datafile + dt.getDate() + dt.getHours(),
-         dataType: 'jsonp'
-         });
-    },
+        url: path + dt.getDate() + dt.getHours(),
+        dataType: 'jsonp',
+        error: function() {
+            FCAPP.Common.msg(true, {
+                msg: '无效数据'
+            });
+        }
+    });
+},
     renderData: function (data) {
     var R = YTList.RUNTIME,
     id = window.gQuery && gQuery.id ? gQuery.id : '';
@@ -57,9 +64,9 @@ loadYTListData: function () {
     },
     goDetail: function (id) {
     id = id || '';
-    FCAPP.Common.jumpTo('yt-detail.html', {
+    FCAPP.Common.jumpTo('ad-detail.html', {
                       ytid: id,
-                      from: "yt-list.html"
+                      from: "advertise.html"
                       }, true);
     }
     };

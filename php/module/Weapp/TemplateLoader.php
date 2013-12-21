@@ -53,7 +53,7 @@ class TemplateLoader{
             'data' => array('__OBJECT__', array()),
         ),
         // visit group
-        'group' => [
+        'group' => array(
             '__DEFAULT__' => array(),
             '__TEMPLATE__' => 'group.js.php',
             '__TARGET__' => 'group.js',
@@ -66,11 +66,36 @@ class TemplateLoader{
             'routes' => array('__OBJECT__',array('lines')),
             'cookies' => array('__SPLIT__', array('event', 'discount')),
             'announcement' => array('__SPLIT__', array('event', 'announce')),
-        ],
+        ),
+        // multi layer ad
+        'advertise' => array(
+            '__DEFAULT__' => array(),
+            '__TEMPLATE__' => 'ad.js.php',
+            '__TARGET__' => 'ad.js',
+            'estate_id' => array('__CTX__', array('estate_id')),
+
+            //TODO
+            //'title' => array(),
+            'desc' => array('intro', 'desc'),
+            'banner_id' => array('intro', 'img'),
+            'ads' => array('__OBJECT__', array('list')),
+
+            '__ARRAY_REF__' => array('sub_advertise',  array('list')),
+        ),
+
+        'sub_advertise' => array(
+            '__DEFAULT__' => array(),
+            '__TEMPLATE__' => 'ad.js.php',
+            '__TARGET__' => 'ad.js',
+        ),
     );
 
     public function __construct($includePath) {
         $this->engine = Engine::create($includePath);
+    }
+
+    private function decorateTemplateValue($value){
+
     }
 
     public function setUpContext($estateId, $name, $appId, $appKey, $wechatId){
@@ -97,7 +122,18 @@ class TemplateLoader{
         $templateValues = array();
         foreach($templateMapping as $key => $value){
             if (Util::startsWith($key, '__')){
-
+                // external templating
+                if(Util::startsWith($key, '__ARRAY_REF__')){
+                    $arr = retrieveData($data, $value[1]);
+                    //check
+                    if ( ! is_array($arr)) continue;
+                    $index = 0;
+                    foreach($arr as $item){
+                        $this->context['index'] = $index;
+                        $this->render(json_encode($item), $value[0], $target);
+                        $index ++;
+                    }
+                }
             }else{
                 $head = $value[0];
                 if (Util::startsWith($head, '__CTX__')){
@@ -117,6 +153,11 @@ class TemplateLoader{
 
                 if ( !$templateValues[$key] && array_key_exists($key, $templateMapping['__DEFAULT__'])){
                     $templateValues[$key] = $templateMapping['__DEFAULT__'][$key];
+                }
+
+                // remove all line breaks in text
+                if(is_string($templateValues[$key])){
+                    $templateValues[$key] = preg_replace("/\r\n|\r|\n/", ' ', $templateValues[$key]);
                 }
             }
         }

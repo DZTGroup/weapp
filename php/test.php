@@ -27,5 +27,5 @@ $engine->render($content, 'picture', 'test');
 $content = Entity::getApprovedEntityContent(32,'group');
 $engine->render($content, 'group');
 
-// test
-echo(AccessToken::getAccessToken('wx05940045fd60e0f1'));
+$content = Entity::getTestEntityContent(32,'advertise');
+$engine->render($content, 'advertise', 'test');

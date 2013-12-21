@@ -23,4 +23,5 @@ $typeMapping = array(
     'picture'=>'/weapp/public_html/html/picture.html?',
     'group'=>'/weapp/public_html/html/group.html?',
     'bbs'=>'/wechat-estate/index.php?r=post/list&',
+    'advertise'=>'/weapp/public_html/html/advertise.html?',
 );
