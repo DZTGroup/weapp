@@ -34,6 +34,7 @@ $query = http_build_query(array('appid'=>$appid, 'eid'=>$eid, 'openid'=>$openid)
 $url = 'http://'.$_SERVER['SERVER_NAME'].$typeMapping[$t].$query;
 
 $filename = '../../../log/statistic';
+date_default_timezone_set('Asia/Shanghai') ;
 $log_str =$eid.' '.$openid.' '.$t.' '.date('Ymd').' '.date("H:i:s")."\n";
 
 $fh = fopen($filename, "a");
