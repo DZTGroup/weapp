@@ -239,8 +239,8 @@ FCAPP.HOUSE.FULL3D = {
                 if (rooms[i].id == gQuery.houseid && rooms[i].full3d) {
                     full3d = rooms[i].full3d;
                     R.currPlace.html((rooms[i].desc || '') + '-' + rooms[i].name);
-                    window.shareData.desc = '鎴峰瀷銆�360搴﹀叏鏅€�-' + rooms[i].desc + rooms[i].name;
-                    window.shareData.descKeep = '鎴峰瀷銆�360搴﹀叏鏅€�-' + rooms[i].desc + rooms[i].name;
+                    window.shareData.desc = '户型【360度全景】-' + rooms[i].desc + rooms[i].name;
+                    window.shareData.descKeep = '户型【360度全景】-' + rooms[i].desc + rooms[i].name;
                     break;
                 }
             }
@@ -255,7 +255,7 @@ FCAPP.HOUSE.FULL3D = {
         }
         FCAPP.Common.hideLoading();
         FCAPP.Common.msg(true, {
-            msg: '閿欒鎴峰瀷'
+            msg: '错误户型'
         });
     },
     alphaList: function() {
