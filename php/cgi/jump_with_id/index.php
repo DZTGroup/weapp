@@ -2,6 +2,7 @@
 require(dirname(__FILE__).'/../../vendor/autoload.php');
 require_once(dirname(__FILE__)."/../../config.php");
 
+
 use Weapp\Util;
 /**
  * Created by PhpStorm.
@@ -31,5 +32,14 @@ $token = $ticket['access_token'];
 $query = http_build_query(array('appid'=>$appid, 'eid'=>$eid, 'openid'=>$openid));
 
 $url = 'http://'.$_SERVER['SERVER_NAME'].$typeMapping[$t].$query;
+
+$filename = '../../../log/statistic';
+date_default_timezone_set('Asia/Shanghai') ;
+$log_str =$eid.' '.$openid.' '.$t.' '.date('Ymd').' '.date("H:i:s")."\n";
+
+$fh = fopen($filename, "a");
+fwrite($fh, $log_str);
+fclose($fh);
+
 \error_log('[debug]jump to '.$url);
 header( 'Location: '.$url );
