@@ -143,7 +143,7 @@ FCAPP.HOUSE.FULL3D = {
     },
     showNotSupport: function() {
         FCAPP.Common.msg(true, {
-            msg: '浣犵殑鎵嬫満鐗堟湰杩囦綆锛屽崌绾ц嚦4.0浠ヤ笂鍙甯镐娇鐢�'
+            msg: '你的手机版本过低，升级至4.0以上可正常使用'
         });
     },
     switchLinks: function() {
@@ -169,7 +169,7 @@ FCAPP.HOUSE.FULL3D = {
             dataType: 'jsonp',
             error: function() {
                 FCAPP.Common.msg(true, {
-                    msg: '鏃犳晥鐨勬埛鍨嬶紒'
+                    msg: '无效的户型！'
                 });
             }
         });
