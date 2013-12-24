@@ -35,7 +35,22 @@ class TemplateLoader{
             'lng' => array('location_info', 'lng'),
             'intro' => array('intro_info', 'text'),
             'traffic' => array('traffic_info', 'text'),
+
+            '__OBJECT_REF__' => array('map', array()),
         ),
+
+        'map' => array(
+            '__DEFAULT__' => array(),
+            '__TEMPLATE__' => 'geo.js.php',
+            '__TARGET__' => 'geo.js',
+            'estate_id' => array('__CTX__', array('estate_id')),
+
+            'name' => array('__CTX__', array('name')),
+            'lat' => array('location_info', 'lat'),
+            'lng' => array('location_info', 'lng'),
+            'address' => array('location_info','address'),
+        ),
+
         'impression' => array(
             '__DEFAULT__' => array(),
             '__TEMPLATE__' => 'impression.js.php',
@@ -165,6 +180,30 @@ class TemplateLoader{
                         $this->render(json_encode($item), $value[0], $target, false);
                         $index ++;
                     }
+
+                    if(!is_null($index_so_far)){
+                        $this->context['index'] = $index_so_far;
+                    }else{
+                        unset($this->context['index']);
+                    }
+                }elseif(Util::startsWith($key, '__OBJECT_REF__')){
+                    $obj = retrieveData($data, $value[1]);
+
+                    $index = \end($value[1]);
+                    if (is_null($index)) $index = '';
+
+                    //check
+                    if ( ! is_array($obj)) continue;
+
+                    // save context
+                    $index_so_far = null;
+                    if ( isset($this->context['index'])){
+                        $index_so_far = $this->context['index'];
+                    }
+
+                    //magic
+                    $this->context['index'] = is_null($index_so_far) ? $index : $index_so_far.'_'.$index;
+                    $this->render(json_encode($obj), $value[0], $target, false);
 
                     if(!is_null($index_so_far)){
                         $this->context['index'] = $index_so_far;

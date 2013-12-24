@@ -31,7 +31,7 @@ $.getJSON("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&
                             {
                                 "name" : "360全景户型",
                                 "type" : "view",
-                                "url" : "http://112.124.55.78/weixinfc/test/houseview.html"
+                                "url" : "http://www.weixinfc.com/weapp/php/cgi/jump.php?eid=32&appid=wx05940045fd60e0f1&t=apartment"
                             },
                             {
                                 "name" : "楼盘印象",
@@ -54,9 +54,9 @@ $.getJSON("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&
                                 "url" : "http://www.weixinfc.com/weapp/php/cgi/jump.php?eid=32&appid=wx05940045fd60e0f1&t=bbs"
                             },
                             {
-                                "name" : "狮子湖",
+                                "name" : "生活圈",
                                 "type" : "view",
-                                "url" : "http://112.124.55.78/loupan/yt-list.html?id=10007"
+                                "url" : "http://www.weixinfc.com/weapp/php/cgi/jump.php?eid=32&appid=wx05940045fd60e0f1&t=advertise"
                             },
                             {
                                 "name" : "看房团",
