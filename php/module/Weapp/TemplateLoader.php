@@ -74,7 +74,6 @@ class TemplateLoader{
             '__TARGET__' => 'ad.js',
             'estate_id' => array('__CTX__', array('estate_id')),
 
-            //TODO
             'title' => array('intro', 'title'),
             'desc' => array('intro', 'desc'),
             'banner_id' => array('intro', 'img'),
@@ -90,6 +89,23 @@ class TemplateLoader{
 
             'id' => array('__CTX__', array('index')),
             'intro' => array('__OBJECT__', array('intro')),
+            'items' => array('__OBJECT__', array('list')),
+
+            '__ARRAY_REF__' => array('discount', array('list')),
+        ),
+
+        'discount' => array(
+            '__DEFAULT__' => array(),
+            '__TEMPLATE__' => 'discount.js.php',
+            '__TARGET__' => 'discount.%index%.js',
+
+            'id' => array('__CTX__', array('index')),
+            'name' => array('name'),
+            'announcement' => array('__SPLIT__', array('announcement')),
+            'phone1' => array('phone1'),
+            'phone2' => array('phone2'),
+            'notice' => array('__SPLIT__', array('notice')),
+            'desc' => array('desc'),
         ),
     );
 
@@ -136,13 +152,25 @@ class TemplateLoader{
                     $arr = retrieveData($data, $value[1]);
                     //check
                     if ( ! is_array($arr)) continue;
+
+                    // save context
+                    $index_so_far = null;
+                    if ( isset($this->context['index'])){
+                        $index_so_far = $this->context['index'];
+                    }
+
                     $index = 0;
                     foreach($arr as $item){
-                        $this->context['index'] = $index;
+                        $this->context['index'] = is_null($index_so_far) ? $index : $index_so_far.'_'.$index;
                         $this->render(json_encode($item), $value[0], $target, false);
                         $index ++;
                     }
-                    unset($this->context['index']);
+
+                    if(!is_null($index_so_far)){
+                        $this->context['index'] = $index_so_far;
+                    }else{
+                        unset($this->context['index']);
+                    }
                 }
             }else{
                 $head = $value[0];

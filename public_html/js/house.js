@@ -11,7 +11,7 @@ FCAPP.HOUSE.List = {
         if (window.gQuery && gQuery.id) {
             id = gQuery.id;
         }
-        FCAPP.Common.loadShareData(id);
+        //FCAPP.Common.loadShareData(id);
     },
     initElements: function() {
         var R = List.RUNTIME;
@@ -32,12 +32,11 @@ FCAPP.HOUSE.List = {
         datafile = datafile.replace(/[<>\'\"\/\\&#\?\s\r\n]+/gi, '');
         datafile += 'rooms.js?';
         $.ajax({
-            //url: '../../building/' + loupanid +'/'+ datafile + dt.getDate() + dt.getHours(),
             url: '../js/'+datafile + dt.getDate() + dt.getHours(),
             dataType: 'jsonp',
             error: function() {
                 FCAPP.Common.msg(true, {
-                    //msg: '无效的户型！'
+                    msg: '无效的户型！'
                 });
             }
         });

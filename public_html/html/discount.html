@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="description" content="狮子湖慢生活" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+    <script type="text/javascript">
+        var search = location.search,
+                star = search.indexOf('title='),
+                end = search.indexOf('&',star),
+                title = '生活圈';
+        if(end==-1){
+            end = search.length;
+        }
+        if(star != -1){
+            title = search.substring(star+6,end)
+        }
+        title = decodeURIComponent(title);
+        title = title.replace(/[<>]/gi,'');
+        document.write("<title>"+title+"</title>");
+    </script>
+    <link href="../css/ad.css" rel="stylesheet" /><!-- http://imgcache.qq.com/lifestyle/act/home_130709_szh/ -->
+    <style type="text/css">
+        .hot{color: #c79958;}/* 标题字颜色 */
+        .top_scroll{background-color: #1d3357;}/* 顶部滚动图片背景色 */
+        .act_join select.selector{
+            width: 60px;
+            text-indent: 5px;
+            -webkit-box-flex: 1;
+            display: block;
+            height: 35px;
+            font-size: 15px;
+            border: 1px solid #bfbfbf;
+            border-radius: 3px;
+            -webkit-box-shadow: 0 0 3px rgba(0,0,0,0.3) inset;
+            font-family: "\5FAE\8F6F\96C5\9ED1", Helvetica,serif;
+            color: #383838;
+            -webkit-appearance: textfield;
+        }
+        .box_call .btn_strong::before{
+            content:"";
+            display:inline-block;
+            width:18px;
+            height:20px;
+            background:url(http://imgcache.gtimg.cn/lifestyle/app/wx_house/img/phone.png);
+            background-size:18px 20px;
+            vertical-align:text-bottom;
+            margin-right:3px
+        }
+        .box {line-height: 1.63em}
+    </style>
+</head>
+<body>
+<script type="text/template" id="template">
+    <!--
+    <div class="photo_area">
+        <div class="photo_show">
+            <div style="text-align:center;width:100%;height:125px;overflow:hidden">
+                <img id="bannerImage" style="margin-top:40px;margin-left:auto;margin-right:auto;width:100%;" src="data:img/gif;base64,R0lGODlhfgIgALMLALa2tuTk5NjY2Ly8vISEhDY2NgQEBB4eHsbGxpqamlZWVv///wAAAAAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh/wtYTVAgRGF0YVhNUDw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MjMxODIzNkI5QzAxMTFFMjgxNUZBQ0NGRDQ2Q0VDNUEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MjMxODIzNkM5QzAxMTFFMjgxNUZBQ0NGRDQ2Q0VDNUEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoyMzE4MjM2OTlDMDExMUUyODE1RkFDQ0ZENDZDRUM1QSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDoyMzE4MjM2QTlDMDExMUUyODE1RkFDQ0ZENDZDRUM1QSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PgH//v38+/r5+Pf29fTz8vHw7+7t7Ovq6ejn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" alt="loading..."/>
+            </div>
+            <div class="photo_title">
+                <h3><%=data.activityName%></h3>
+                <p><%=data.rules.enrollbt%> ~ <%=data.rules.enrollet%></p>
+            </div>
+        </div>
+    </div>
+    -->
+    <!--中间动态显示模块-->
+    <%if(data.status==0){%> <!--活动进行中-->
+        <%if(data.rules.joined==false){%> <!--是否已经报名-->
+            <%if(data.joinType==1){%> <!--报名方式，在线or电话-->
+            <%$("#container")[0].style.paddingBottom="60px";%>
+            <div class="box_call" style="position:fixed;left:0;bottom:0;width:100%;margin:0;padding:0;overflow:hidden;z-index:88;-webkit-box-shadow: 0 -2px 2px rgba(0,0,0,0.3);background:rgba(0,0,0,0.9)">
+                <a href="#" class="btn_strong" style="margin:10px 20px;" onclick="YTJoin.showContacts();return false;">立刻电话预约</a>
+            </div>
+            <div class="pop_up" id="contact" style="display: none; z-index:99;position:fixed">
+                <div class="box">
+                    <h2 class="hot">立刻电话预约</h2>
+                    <ul class="phone_list">
+                        <%
+                        var phoneNums=data.contact.phones;
+                        for(var i=0,c=phoneNums.length;i<c;i++){
+                        var phone=phoneNums[i];
+                        %>
+                        <li><a href="tel://<%=phone%>" class="ico_phone"><%=phone%></a></li>
+                        <% } /* end of phoneNums loop */ %>
+                        <li class="weak">服务时间:<%=data.contact.timesOn%></li>
+                    </ul>
+                </div>
+            </div>
+            <%}else if(data.joinType==0){%>
+            <div class="date_box">
+                <ul class="act_join">
+                    <li>
+                        <em>姓&emsp;&emsp;名：</em><input id="username" name="" type="text" style="max-width:110px"/>&emsp;
+                        人数：
+                        <select id="usercount" class="selector">
+                            <%
+                            for(var i=data.rules.nummin,c=data.rules.nummax+1;i<c;i++){
+                            %>
+                                <option><%=i%></option>
+                            <%}%>
+                        </select>
+                    </li>
+                    <li>
+                        <em>手&emsp;&emsp;机：</em><input id="phonenumber" name="" type="text">
+                    </li>
+                    <li class="ico_date"><em>开始时间：</em><input id="timeBegin" type="text" name="dstart" value="" readonly/></li>
+                    <li class="ico_date"><em>结束时间：</em><input id="timeEnd" type="text" name="dend" value="" readonly/></li>
+                </ul>
+                <div id="calendar1" class="date_list"></div>
+                <div id="calendar2" class="date_list"></div>
+                <div class="control">
+                    <!--<p><a href="#">请阅读并同意认筹须知</a> 后点击预约按钮</p>-->
+                    <!--<p><input name="" type="checkbox" value="">我已阅读并同意 <a href="#" class="link">网友活动须知</a></p>-->
+                    <a href="#" class="btn_strong" onclick="YTJoin.joinAction();return false;"><span>立刻预约</span></a>
+                </div>
+            </div>
+            <%}%>
+        <%}else{%>
+            <div class="box">
+                <div class="result">
+                    <h4 class="ico_success">您已经报名成功!</h4>
+                    <div class="result_info">
+                        <p>工作人员将以短信或电话的方式</p>
+                        <p>确认您的报名信息</p>
+                    </div>
+                </div>
+            </div>
+        <%}%>
+    <%}else if(data.status==1){%>
+        <div class="box">
+            <div class="result">
+                <h4 class="ico_smile">活动已成功结束!</h4>
+                <div class="result_info">
+                    <p>请关注我们的微信</p>
+                    <p>留意其他优惠信息</p>
+                </div>
+            </div>
+        </div>
+    <%}%>
+    <!--中间模块 END-->
+    <%if(data.discountInfo){%>
+    <div class="box">
+        <h2 class="hot"><%=data.discountInfo.title%></h2>
+        <div class="info_show info_weak">
+            <%
+            var items=data.discountInfo.items;
+            for(var i=0,c=items.length;i<c;i++){
+            var item=items[i];
+            %>
+                <%if(item.title){%>
+                    <em><%=item.title%></em>
+                <%}%>
+                <ul>
+                    <%
+                    var descList=item.descList;
+                    for(var j=0,n=descList.length;j<n;j++){
+                    var desc=descList[j];
+                    %>
+                        <li><%=desc%></li>
+                    <% } /* end of desclist loop */ %>
+                </ul>
+            <% } /* end of items loop */ %>
+        </div>
+    </div>
+    <%}%>
+    <%if(data.bookingInfo){%>
+    <div class="box">
+        <h2 class="hot"><%=data.bookingInfo.title%></h2>
+        <div class="info_show info_weak">
+            <%
+            var items=data.bookingInfo.items;
+            for(var i=0,c=items.length;i<c;i++){
+            var item=items[i];
+            %>
+                <%if(item.title){%>
+                    <em><%=item.title%></em>
+                <%}%>
+                <ul>
+                    <%
+                    var descList=item.descList;
+                    for(var j=0,n=descList.length;j<n;j++){
+                    var desc=descList[j];
+                    %>
+                    <li><%=desc%></li>
+                    <% } /* end of desclist loop */ %>
+                </ul>
+            <% } /* end of items loop */ %>
+        </div>
+    </div>
+    <%}%>
+    <%if(data.noticeInfo){%>
+    <div class="box">
+        <h2 class="hot"><%=data.noticeInfo.title%></h2>
+        <div class="info_show info_weak">
+            <%
+            var items=data.noticeInfo.items;
+            for(var i=0,c=items.length;i<c;i++){
+            var item=items[i];
+            %>
+                <%if(item.title){%>
+                    <em><%=item.title%></em>
+                <%}%>
+                <ul>
+                    <%
+                    var descList=item.descList;
+                    for(var j=0,n=descList.length;j<n;j++){
+                    var desc=descList[j];
+                    %>
+                    <li><%=desc%></li>
+                    <% } /* end of desclist loop */ %>
+                </ul>
+            <% } /* end of items loop */ %>
+        </div>
+    </div>
+    <%}%>
+</script>
+
+<div class="wrapper" id="container" style="margin-top: 55px"></div>
+<div id="navBar" style="position:fixed;left:0;top:0;height:44px;width:100%;overflow:hidden;background-color:rgba(0,0,0,0.7);vertical-align:middle;text-align: center">
+    <div id="btnBack" style="position:absolute;height:44px;float:left;width:60px;overflow:hidden;background-color:rgba(0,0,0,0.2);text-align:center;vertical-align:middle">
+        <img style="height:24px;margin-top: 10px" src="http://imgcache.gtimg.cn/lifestyle/app/wx_house/img/backicon.png"/>
+    </div>
+    <div id="titleBar" style="width:100%;height:100%;line-height:44px;text-align:center;color:white;font-size: 18px">
+    </div>
+</div>
+<div class="pop_tips" id="popTips" style="display:none;">
+    <div class="oval"></div>
+    <div class="pop_show">
+        <h4 id="tipsTitle">温馨提示</h4>
+        <div class="pop_info" id="tipsMsg">
+            <p></p>
+        </div>
+        <div class="pop_btns">
+            <a href="javascript:void(0);" id="tipsOK">确定</a>
+            <a href="javascript:void(0);" style="display:none;" id="tipsCancel">取消</a>
+        </div>
+    </div>
+</div>
+<div class="pop_mask" id="popMask" style="display:none;"></div>
+<div id="popFail" style="">
+    <div class="bk"></div>
+    <div class="cont">
+        <img src="data:image/gif;base64,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" alt="loading...">
+        正在加载...
+    </div>
+</div>
+<div id="resultDialog" class="pop_up" style="display:none;z-index:99">
+    <div class="box">
+        <div class="result">
+            <h4 id="resultTitle" class="ico_success"></h4>
+            <div id="resultMsg" class="result_info">
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../js/share.js?max_age=864000"></script>
+<script type="text/javascript" src="../js/moment.min.js"></script>
+<script type="text/javascript" src="../js/calendar.moment.js"></script>
+<script type="text/javascript" src="../js/common.js?ver=2.4"></script>
+<script type="text/javascript" src="../js/discount.js?ver=1.0"></script>
+</body>
+</html>

@@ -8,21 +8,25 @@ renderData({
 <?php if(is_array($intro['imgs']))foreach($intro['imgs'] as $img){ ?>
         {
             "title" : "<?php echo $img['title']?>",
-            "url" : "<?php echo $img['url']?>"
+            "url" : "/wechat-estate/upload_files/<?php echo $img['url']?>"
         },
 <?php } ?>
     ],
     "modules" : [
         {
             "items" : [
+<?php
+$index = 0;
+if(is_array($items)) foreach($items as $item){?>
                 {
-                    "actid" : "",
-                    "desc" : "",
-                    "icon" : "",
-                    "timeEnd" : "23:00",
-                    "timeStart" : "9:00",
-                    "title" : ""
-                }
+                    "actid" : "<?php echo $id.'_'.$index?>",
+                    "desc" : "<?php echo $item['desc']?>",
+                    "icon" : "/wechat-estate/upload_files/<?php echo $item['icon']?>",
+                    "timeEnd" : "<?php echo $item['book_start_time']?>",
+                    "timeStart" : "<?php echo $item['book_end_time']?>",
+                    "title" : "<?php echo $item['name']?>"
+                },
+<?php $index++;}?>
             ],
             "title" : "尊享优惠"
         }

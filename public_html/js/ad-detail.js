@@ -38,7 +38,7 @@ FCAPP.YTDetail = FCAPP.YTDetail || {
         R.btnBack.bind("click", function () {
             if (window.gQuery && gQuery.from) delete gQuery.from;
             if (window.gQuery && gQuery.ytid) delete gQuery.ytid;
-            FCAPP.Common.jumpTo('yt-list.html', {}, true);
+            FCAPP.Common.jumpTo('advertise.html', {}, true);
         });
     },
     loadYTDetailData: function () {
@@ -199,9 +199,9 @@ FCAPP.YTDetail = FCAPP.YTDetail || {
         pic.setAttribute("loading", true);
     },
     goJoinPage: function (actid, title) {
-        FCAPP.Common.jumpTo('yt-join.html', {
+        FCAPP.Common.jumpTo('discount.html', {
             actid: actid,
-            refer: "yt-detail.html"
+            refer: "ad-detail.html"
         }, true);
     }
 };
