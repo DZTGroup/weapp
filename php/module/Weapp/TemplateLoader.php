@@ -59,6 +59,13 @@ class TemplateLoader{
             'sum' => array('init', 'number'),
             'impressions' => array('__OBJECT__', array('impressions')),
         ),
+        'comment' => array(
+            '__DEFAULT__' => array(),
+            '__TEMPLATE__' => 'comment.js.php',
+            '__TARGET__' => 'comment.js',
+            'estate_id' => array('__CTX__', array('estate_id')),
+            'comments' => array('__OBJECT__', array()),
+        ),
         // pic show
         'picture' => array(
             '__DEFAULT__' => array(),

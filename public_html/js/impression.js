@@ -302,8 +302,21 @@ FCAPP.REVIEW = FCAPP.REVIEW || {
     },
     
     loadProList: function() {
-    	
         window.renderProList = REVIEW.renderProList;
+
+        var eid = window.gQuery && gQuery.eid ? gQuery.eid : 'default',
+            dt = new Date();
+        eid = eid.replace(/[<>\'\"\/\\&#\?\s\r\n]+/gi, '');
+
+        var pathParameter = window.gQuery && gQuery.openid && gQuery.openid == 0 ? 'test':'wechat';
+        // mod by aohajin
+        var path = '/weapp/public_html/data/'+eid+'/'+pathParameter+'/comment.js?';
+        $.ajax({
+            url: path + dt.getDate() + dt.getHours(),
+            dataType: 'jsonp'
+        });
+
+        /*
         var datafile = window.gQuery && gQuery.loupanid ? gQuery.loupanid + '.': '',
         dt = new Date();
         datafile = datafile.replace(/[<>\'\"\/\\&#\?\s\r\n]+/gi, '');
@@ -312,7 +325,7 @@ FCAPP.REVIEW = FCAPP.REVIEW || {
             url: '/weapp/public_html/prolist.js?' + dt.getDate() + dt.getHours(),
             dataType: "jsonp",
             error: REVIEW.proListError
-        });
+        });*/
     },
     renderProList: function(data) {
         var R = REVIEW.RUNTIME;

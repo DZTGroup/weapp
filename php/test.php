@@ -18,8 +18,14 @@ $engine->render($content, 'intro');
 $content = Entity::getTestEntityContent(32,'intro');
 $engine->render($content, 'intro', 'test');
 
+$content = Entity::getTestEntityContent(32,'comment');
+$engine->render($content, 'comment', 'test');
+
 $content = Entity::getApprovedEntityContent(32,'impression');
 $engine->render($content, 'impression');
+
+$content = Entity::getApprovedEntityContent(32,'impression');
+$engine->render($content, 'impression', 'test');
 
 $content = Entity::getTestEntityContent(32,'picture');
 $engine->render($content, 'picture', 'test');
