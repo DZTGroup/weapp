@@ -108,6 +108,7 @@ class TemplateLoader{
             '__DEFAULT__' => array(),
             '__TEMPLATE__' => 'sub-ad.js.php',
             '__TARGET__' => 'sub-ad.%index%.js',
+            'estate_id' => array('__CTX__', array('estate_id')),
 
             'id' => array('__CTX__', array('index')),
             'intro' => array('__OBJECT__', array('intro')),
@@ -120,6 +121,7 @@ class TemplateLoader{
             '__DEFAULT__' => array(),
             '__TEMPLATE__' => 'discount.js.php',
             '__TARGET__' => 'discount.%index%.js',
+            'estate_id' => array('__CTX__', array('estate_id')),
 
             'id' => array('__CTX__', array('index')),
             'name' => array('name'),
