@@ -197,7 +197,7 @@ var FCAPP = FCAPP || {
                     oimg = document.getElementById(this.idx);
                     info.dom = oimg;
                 }
-                if (!oimg.parentNode) {
+                if (!oimg || !oimg.parentNode) {
                     return;
                 }
                 if ( !! this.cb) {

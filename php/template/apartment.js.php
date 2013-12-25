@@ -54,15 +54,20 @@ showRooms({
             },
     <?php }?>
         ],
-    "full3d":[ {
-    "name": "水蓝天J350-B",
-    "list": [ {
-    "name":"360_主卧",
-    "url":"/club/life/trade/full3d/bgy/shltJ350A/zhw/ok.html"
-    }],
-    "bimg":""
-    }]
+    "full3d":[
+        {
+            "name": "<?php echo $room['base-info']['name']?>",
+            "list": [
+            <?php foreach($room['panoramagram'] as $full3d){?>
+                {
+                    "name":"<?php echo $full3d['name']?>",
+                    "url":"<?php echo $full3d['link']?>"
+                },
+            <?php }?>
+            ],
+            "bimg":""
+        }]
     },
 <?php }?>
-        ]
+     ]
 });

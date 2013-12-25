@@ -33,11 +33,11 @@ FCAPP.HOUSE.FULL3D = {
     },
     go3D: function(url, title) {
         var t = new Date();
-        FCAPP.Common.jumpTo('http://imgcache.gtimg.cn' + url, {
+        FCAPP.Common.jumpTo(url, {
             title: title || '',
             _t: '' + t.getDay() + t.getHours(),
-            desc: window.shareData.desc,
-            '#wechat_webview_type': '1'
+            //desc: window.shareData.desc,
+            //'#wechat_webview_type': '1'
         });
     },
     resizeLayout: function() {
@@ -239,9 +239,9 @@ FCAPP.HOUSE.FULL3D = {
 
             FULL3D.showFloat();
             delete R.bgInterval;
-            R.bgImg.style.opacity = 1;
+            if(R.bgImg.style)R.bgImg.style.opacity = 1;
         } else {
-            R.bgImg.style.opacity = R.opacity / 100;
+            if(R.bgImg.style)R.bgImg.style.opacity = R.opacity / 100;
         }
     },
     showRooms: function(data) {
