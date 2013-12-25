@@ -21,29 +21,29 @@ $.getJSON("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&
                             {
                                 "name" : "楼盘简介",
                                 "type" : "view",
-                                "url" : "http://www.weixinfc.com/weapp/php/cgi/jump.php?eid=32&appid=wx05940045fd60e0f1&t=intro"
+                                "url" : "http://www.weixinfc.com/weapp/php/cgi/jump.php?eid=37&appid=wx05940045fd60e0f1&t=intro"
                             },
                             {
                                 "name" : "十里画册",
                                 "type" : "view",
-                                "url" : "http://www.weixinfc.com/weapp/php/cgi/jump.php?eid=32&appid=wx05940045fd60e0f1&t=picture"
+                                "url" : "http://www.weixinfc.com/weapp/php/cgi/jump.php?eid=37&appid=wx05940045fd60e0f1&t=picture"
                             },
                             {
                                 "name" : "360全景户型",
                                 "type" : "view",
-                                "url" : "http://www.weixinfc.com/weapp/php/cgi/jump.php?eid=32&appid=wx05940045fd60e0f1&t=apartment"
+                                "url" : "http://www.weixinfc.com/weapp/php/cgi/jump.php?eid=37&appid=wx05940045fd60e0f1&t=apartment"
                             },
                             {
                                 "name" : "楼盘印象",
                                 "type" : "view",
-                                "url" : "http://www.weixinfc.com/weapp/php/cgi/jump.php?eid=32&appid=wx05940045fd60e0f1&t=impression"
+                                "url" : "http://www.weixinfc.com/weapp/php/cgi/jump.php?eid=37&appid=wx05940045fd60e0f1&t=impression"
                             }
                         ]
                     },
                     {
                         "name" : "楼盘实景",
                         "type" : "view",
-                        "url" : "http://www.weixinfc.com/weapp/php/cgi/jump.php?eid=32&appid=wx05940045fd60e0f1&t=userpicwall"
+                        "url" : "http://www.weixinfc.com/weapp/php/cgi/jump.php?eid=37&appid=wx05940045fd60e0f1&t=userpicwall"
                     },
                     {
                         "name" : "会员服务",
@@ -51,17 +51,17 @@ $.getJSON("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&
                             {
                                 "name" : "论坛",
                                 "type" : "view",
-                                "url" : "http://www.weixinfc.com/weapp/php/cgi/jump.php?eid=32&appid=wx05940045fd60e0f1&t=bbs"
+                                "url" : "http://www.weixinfc.com/weapp/php/cgi/jump.php?eid=37&appid=wx05940045fd60e0f1&t=bbs"
                             },
                             {
                                 "name" : "生活圈",
                                 "type" : "view",
-                                "url" : "http://www.weixinfc.com/weapp/php/cgi/jump.php?eid=32&appid=wx05940045fd60e0f1&t=advertise"
+                                "url" : "http://www.weixinfc.com/weapp/php/cgi/jump.php?eid=37&appid=wx05940045fd60e0f1&t=advertise"
                             },
                             {
                                 "name" : "看房团",
                                 "type" : "view",
-                                "url" : "http://www.weixinfc.com/weapp/php/cgi/jump.php?eid=32&appid=wx05940045fd60e0f1&t=group"
+                                "url" : "http://www.weixinfc.com/weapp/php/cgi/jump.php?eid=37&appid=wx05940045fd60e0f1&t=group"
                             },
                             {
                                 "name" : "我的认筹",

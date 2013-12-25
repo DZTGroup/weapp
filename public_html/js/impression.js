@@ -240,7 +240,7 @@ FCAPP.REVIEW = FCAPP.REVIEW || {
                 openid: window.gQuery && gQuery.openid ? gQuery.openid: '',
 
                 cmd: 'set',
-                im: review
+                im: review || ''
             };
             /*if (id > 0) {
                 data.cmd = 'update';

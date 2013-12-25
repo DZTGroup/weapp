@@ -24,7 +24,7 @@ showRooms({
         "floor":"<?php echo $room['base-info']['floors']?>",
         "area":"<?php echo $room['base-info']['area']?>",
     "simg":"",
-    "bimg": "", //"http://ww3.sinaimg.cn/thumbnail/62037b5ajw1ebrdptpmlxj20c80gmmzr.jpg",
+    "bimg": "/wechat-estate/upload_files/<?php echo $estate_id?>/<?php echo $room['base-info']['face_img']?>",
         "width":1600,
         "height":1600,
         "dtitle":[
