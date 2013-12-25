@@ -28,7 +28,7 @@ $typeMapping = array(
     'userpicwall'=>'/wechat-estate/index.php?r=userpicwall/list&',
 );
 
-// for sync and preview
+// for preview
 $typeSync = array(
     'comment' => 'impression',
 );

@@ -23,11 +23,6 @@ $engine = new TemplateLoader(TEMPLATE_PATH);
 $baseInfo = Util::getAppInfo($estateId);
 $engine->setUpContext($baseInfo['id'], $baseInfo['name'],$baseInfo['app_id'], $baseInfo['app_key'], $baseInfo['wechat_id']);
 
-//type mapping
-if(array_key_exists($type, $typeSync)){
-    $type = $typeSync[$type];
-}
-
 if ( $formal > 0 ){
     $content = Entity::getApprovedEntityContent($estateId,$type);
     $engine->render($content, $type);
