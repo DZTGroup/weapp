@@ -63,6 +63,7 @@ if($cmd=='apply'){
             'gid' => $gid,
         ));
         if($stmt->rowCount() > 0){
+            \error_log('openid:'.$openid.';eid='.$estateId.';gid='.$gid);
             $ret = -1401;
             break;
         }
