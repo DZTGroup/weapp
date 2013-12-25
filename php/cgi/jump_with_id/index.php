@@ -41,5 +41,5 @@ $fh = fopen($filename, "a");
 fwrite($fh, $log_str);
 fclose($fh);
 
-\error_log('[debug]jump to '.$url);
+//\error_log('[debug]jump to '.$url);
 header( 'Location: '.$url );
