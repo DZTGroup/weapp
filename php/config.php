@@ -26,6 +26,7 @@ $typeMapping = array(
     'bbs'=>'/wechat-estate/index.php?r=post/list&',
     'advertise'=>'/weapp/public_html/html/advertise.html?',
     'userpicwall'=>'/wechat-estate/index.php?r=userpicwall/list&',
+    'apartment' => '/weapp/public_html/html/apartment.html?',
 );
 
 // for preview
