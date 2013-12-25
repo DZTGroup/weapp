@@ -17,6 +17,7 @@ define('TARGET_PATH', dirname(__FILE__).'/../public_html/data');
 define('CGI_URI', 'http://www.weixinfc.com/weapp/php/cgi');
 define('WECHAT_REDIRECT', 'https://open.weixin.qq.com/connect/oauth2/authorize');
 
+// for jump
 $typeMapping = array(
     'intro'=>'/weapp/public_html/html/intro.html?',
     'impression'=>'/weapp/public_html/html/impression.html?',
@@ -25,4 +26,9 @@ $typeMapping = array(
     'bbs'=>'/wechat-estate/index.php?r=post/list&',
     'advertise'=>'/weapp/public_html/html/advertise.html?',
     'userpicwall'=>'/wechat-estate/index.php?r=userpicwall/list&',
+);
+
+// for sync and preview
+$typeSync = array(
+    'comment' => 'impression',
 );

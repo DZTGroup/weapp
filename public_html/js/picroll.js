@@ -42,7 +42,7 @@ FCAPP.HOUSE.Picroll = {
             window.shareData.link += '&houseid='+gQuery.houseid;
             window.shareData.linkKeep += '&houseid='+gQuery.houseid;
         }
-        FCAPP.Common.loadShareData(id);
+        //FCAPP.Common.loadShareData(id);
         FCAPP.Common.hideToolbar();
     },
     initElements:function(R){
@@ -76,7 +76,7 @@ FCAPP.HOUSE.Picroll = {
         try{myScroll.refresh();}catch(e){}
     },
     closePage:function(){
-        FCAPP.Common.jumpTo('house.html',{'#wechat_webview_type':1},true);
+        FCAPP.Common.jumpTo('apartment.html',{'#wechat_webview_type':1},true);
         //WeixinJSBridge.invoke('closeWindow');
     },
     switchDetail:function(){
@@ -99,6 +99,24 @@ FCAPP.HOUSE.Picroll = {
     },
     loadData:function(){
         window.showRooms = Picroll.showRooms;
+
+        var eid = window.gQuery && gQuery.eid ? gQuery.eid : 'default',
+            dt = new Date();
+        eid = eid.replace(/[<>\'\"\/\\&#\?\s\r\n]+/gi, '');
+
+        var pathParameter = window.gQuery && gQuery.openid && gQuery.openid == 0 ? 'test':'wechat';
+        // mod by aohajin
+        var path = '/weapp/public_html/data/'+eid+'/'+pathParameter+'/apartment.js?';
+        $.ajax({
+            url: path + dt.getDate() + dt.getHours(),
+            dataType: 'jsonp',
+            error: function() {
+                FCAPP.Common.msg(true, {
+                    msg: '数据加载失败！'
+                });
+            }
+        });
+        /*
         var datafile = window.gQuery && gQuery.id ? gQuery.id + '.' : '',
             dt = new Date();
         datafile = datafile.replace(/[<>\'\"\/\\&#\?\s\r\n]+/gi,'');
@@ -110,7 +128,7 @@ FCAPP.HOUSE.Picroll = {
             error:function(){
                 FCAPP.Common.msg(true,{msg:'数据加载失败！'});
             }
-        });
+        });*/
     },
     showRooms:function(res){
         var R = Picroll.RUNTIME,

@@ -129,6 +129,16 @@ class TemplateLoader{
             'notice' => array('__SPLIT__', array('notice')),
             'desc' => array('desc'),
         ),
+
+        // apartment 360
+        'apartment' => array(
+            '__DEFAULT__' => array(),
+            '__TEMPLATE__' => 'apartment.js.php',
+            '__TARGET__' => 'apartment.js',
+            'estate_id' => array('__CTX__', array('estate_id')),
+
+            'data' => array('__OBJECT__', array()),
+        ),
     );
 
     public function __construct($includePath) {

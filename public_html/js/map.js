@@ -67,7 +67,7 @@ FCAPP.MAP = {
         var R = MAP.RUNTIME;
         R.myplaceBtn.bind('click', MAP.getGeoLocation);
         R.btnClose.bind('click', function () {
-            FCAPP.Common.jumpTo('index.html', {
+            FCAPP.Common.jumpTo('intro.html', {
                 '#wechat_webview_type': 1
             }, true);
             if (!/Mac OS/i.test(navigator.userAgent)) {

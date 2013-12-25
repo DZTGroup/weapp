@@ -35,3 +35,6 @@ $engine->render($content, 'group');
 
 $content = Entity::getTestEntityContent(32,'advertise');
 $engine->render($content, 'advertise', 'test');
+
+$content = Entity::getTestEntityContent(32,'apartment');
+$engine->render($content, 'apartment', 'test');

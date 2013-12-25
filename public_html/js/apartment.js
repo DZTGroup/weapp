@@ -26,6 +26,25 @@ FCAPP.HOUSE.List = {
     },
     loadListData: function() {
         window.showRooms = List.showRooms;
+
+        var eid = window.gQuery && gQuery.eid ? gQuery.eid : 'default',
+            dt = new Date();
+        eid = eid.replace(/[<>\'\"\/\\&#\?\s\r\n]+/gi, '');
+
+        var pathParameter = window.gQuery && gQuery.openid && gQuery.openid == 0 ? 'test':'wechat';
+        // mod by aohajin
+        var path = '/weapp/public_html/data/'+eid+'/'+pathParameter+'/apartment.js?';
+        $.ajax({
+            url: path + dt.getDate() + dt.getHours(),
+            dataType: 'jsonp',
+            error: function() {
+                FCAPP.Common.msg(true, {
+                    msg: '无效的户型！'
+                });
+            }
+        });
+
+        /*
         var datafile = window.gQuery && gQuery.id ? gQuery.id + '.': '',
 			loupanid = window.gQuery && gQuery.loupanid ? gQuery.loupanid: '',
         dt = new Date();
@@ -39,7 +58,7 @@ FCAPP.HOUSE.List = {
                     msg: '无效的户型！'
                 });
             }
-        });
+        });*/
     },
     showRooms: function(res) {
         var R = List.RUNTIME;
