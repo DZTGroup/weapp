@@ -2,8 +2,8 @@ showPics([ {
     "ps1" : [ { "size" : [ 150,
     150
 ],
-        "subTitle" : "<?php echo $data['pic_wall_1']['subtitle'] ?>",
-        "title" : "<?php echo $data['pic_wall_1']['title'] ?>",
+        "subTitle" : "<?php echo $data[0]['subtitle'] ?>",
+        "title" : "<?php echo $data[0]['title'] ?>",
         "type" : "title"
     },
         { "img" : "http://www.weixinfc.com/wechat-estate/upload_files/<?php echo $estate_id;?>/<?php echo $data['pic_wall_1']['img1']?>",
@@ -28,7 +28,7 @@ showPics([ {
     ],
         "type" : "img"
     },
-        { "content" : "<?php echo $data['pic_wall_1']['desc'] ?>",
+        { "content" : "<?php echo $data[1]['desc'] ?>",
             "size" : [ 170,
             150
         ],
