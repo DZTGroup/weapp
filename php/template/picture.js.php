@@ -28,7 +28,7 @@ showPics([ {
     ],
         "type" : "img"
     },
-        { "content" : "<?php echo $data[1]['desc'] ?>",
+        { "content" : "<?php echo $data[0]['desc'] ?>",
             "size" : [ 170,
             150
         ],
@@ -42,14 +42,14 @@ showPics([ {
             "type" : "img"
         }
     ],
-    "title" : "<?php echo $data['pic_wall_1']['name'] ?>"
+    "title" : "<?php echo $data[0]['name'] ?>"
 },
     {
         "ps1" : [ { "size" : [ 150,
         150
     ],
-            "subTitle" : "<?php echo $data['pic_wall_2']['subtitle'] ?>",
-            "title" : "<?php echo $data['pic_wall_2']['title'] ?>",
+            "subTitle" : "<?php echo $data[1]['subtitle'] ?>",
+            "title" : "<?php echo $data[1]['title'] ?>",
             "type" : "title"
         },
             { "img" : "http://www.weixinfc.com/wechat-estate/upload_files/<?php echo $estate_id;?>/<?php echo $data['pic_wall_2']['img1']?>",
@@ -74,7 +74,7 @@ showPics([ {
         ],
             "type" : "img"
         },
-            { "content" : "<?php echo $data['pic_wall_2']['desc'] ?>",
+            { "content" : "<?php echo $data[1]['desc'] ?>",
                 "size" : [ 170,
                 150
             ],
@@ -88,14 +88,14 @@ showPics([ {
                 "type" : "img"
             }
         ],
-        "title" : "<?php echo $data['pic_wall_2']['name'] ?>"
+        "title" : "<?php echo $data[1]['name'] ?>"
     },
     {
         "ps1" : [ { "size" : [ 150,
         150
     ],
-            "subTitle" : "<?php echo $data['pic_wall_3']['subtitle'] ?>",
-            "title" : "<?php echo $data['pic_wall_3']['title'] ?>",
+            "subTitle" : "<?php echo $data[2]['subtitle'] ?>",
+            "title" : "<?php echo $data[2]['title'] ?>",
             "type" : "title"
         },
             { "img" : "http://www.weixinfc.com/wechat-estate/upload_files/<?php echo $estate_id;?>/<?php echo $data['pic_wall_3']['img1']?>",
@@ -120,7 +120,7 @@ showPics([ {
         ],
             "type" : "img"
         },
-            { "content" : "<?php echo $data['pic_wall_3']['desc'] ?>",
+            { "content" : "<?php echo $data[2]['desc'] ?>",
                 "size" : [ 170,
                 150
             ],
@@ -134,6 +134,6 @@ showPics([ {
                 "type" : "img"
             }
         ],
-        "title" : "<?php echo $data['pic_wall_3']['name'] ?>"
+        "title" : "<?php echo $data[2]['name'] ?>"
     }
 ]);
