@@ -1,22 +1,23 @@
-<script>
-showPics([ 
+showPics([
+
+<?php foreach($data as $d){?> 
 
 {
     "ps1" : [ { "size" : [ 150,
     150
 ],
-        "subTitle" : "<?php echo $data[0]['subtitle'] ?>",
-        "title" : "<?php echo $data[0]['title'] ?>",
+        "subTitle" : "<?php echo $d['subtitle'] ?>",
+        "title" : "<?php echo $d['title'] ?>",
         "type" : "title"
     },
-        { "img" : "http://www.weixinfc.com/wechat-estate/upload_files/<?php echo $estate_id;?>/<?php echo $data[0]['img1']?>",
+        { "img" : "http://www.weixinfc.com/wechat-estate/upload_files/<?php echo $estate_id;?>/<?php echo $d['img1']?>",
             "name" : "",
             "size" : [ 260,
             150
         ],
             "type" : "img"
         },
-        { "img" : "http://www.weixinfc.com/wechat-estate/upload_files/<?php echo $estate_id;?>/<?php echo $data[0]['img2']?>",
+        { "img" : "http://www.weixinfc.com/wechat-estate/upload_files/<?php echo $estate_id;?>/<?php echo $d['img2']?>",
             "name" : "",
             "size" : [ 100,
             150
@@ -24,20 +25,20 @@ showPics([
             "type" : "img"
         }
     ],
-    "ps2" : [ { "img" : "http://www.weixinfc.com/wechat-estate/upload_files/<?php echo $estate_id;?>/<?php echo $data[0]['img3']?>",
+    "ps2" : [ { "img" : "http://www.weixinfc.com/wechat-estate/upload_files/<?php echo $estate_id;?>/<?php echo $d['img3']?>",
         "name" : "",
         "size" : [ 220,
         150
     ],
         "type" : "img"
     },
-        { "content" : "<?php echo $data[0]['desc'] ?>",
+        { "content" : "<?php echo $d['desc'] ?>",
             "size" : [ 170,
             150
         ],
             "type" : "text"
         },
-        { "img" : "http://www.weixinfc.com/wechat-estate/upload_files/<?php echo $estate_id;?>/<?php echo $data[0]['img4']?>",
+        { "img" : "http://www.weixinfc.com/wechat-estate/upload_files/<?php echo $estate_id;?>/<?php echo $d['img4']?>",
             "name" : "",
             "size" : [ 120,
             150
@@ -45,8 +46,8 @@ showPics([
             "type" : "img"
         }
     ],
-    "title" : "<?php echo $data[0]['name'] ?>"
+    "title" : "<?php echo $d['name'] ?>"
     },
+?>
 
 ]);
-</script>
