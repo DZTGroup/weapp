@@ -48,6 +48,6 @@ showPics([
     ],
     "title" : "<?php echo $d['name'] ?>"
     },
-?>
+<?php } ?>
 
 ]);
