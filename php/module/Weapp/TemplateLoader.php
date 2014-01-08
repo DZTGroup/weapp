@@ -139,8 +139,30 @@ class TemplateLoader{
             '__TARGET__' => 'apartment.js',
             'estate_id' => array('__CTX__', array('estate_id')),
 
-            'data' => array('__OBJECT__', array()),
+            'top_img' => array('top_img'),
+            'data' => array('__OBJECT__', array('types')),
         ),
+
+        // reservation
+        'reservation' => array(
+            '__DEFAULT__' => array(),
+            '__TEMPLATE__' => 'reservation.js.php',
+            '__TARGET__' => 'reservation.js',
+            'estate_id' => array('__CTX__', array('estate_id')),
+
+            'start_date' => array('event', 'start_date'),
+            'start_time' => array('event', 'start_time'),
+            'end_date' => array('event', 'end_date'),
+            'end_time' => array('event', 'end_time'),
+            'top_img' => array('event', 'img'),
+            'name' => array('event', 'name'),
+
+            'sub_title' => array('event', 'subtitle'),
+            'type' => array('setting', 'type'),
+
+            'rules' => array('__SPLIT__', array('event', 'notice')),
+            'tips' => array('__SPLIT__', array('event', 'tip')),
+        )
     );
 
     public function __construct($includePath) {
@@ -257,7 +279,6 @@ class TemplateLoader{
                 }
             }
         }
-
         $text = $this->engine->render($this->decorateTemplateValue($templateMapping['__TEMPLATE__']), $templateValues);
 
         /*

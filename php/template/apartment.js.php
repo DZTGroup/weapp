@@ -1,6 +1,5 @@
 <?php
 // preprocess data
-
 // first, unclassify all rooms' data
 $rooms = array();
 if(is_array($data))foreach($data as $type){
@@ -13,7 +12,7 @@ if(is_array($data))foreach($data as $type){
 ?>
 
 showRooms({
-    "banner":"http://imgcache.gtimg.cn/lifestyle/app/wx_house/images/im_1440260.jpg",
+    "banner":"/wechat-estate/upload_files/<?php echo $estate_id?>/<?php echo $top_img?>",
     "rooms":[
 <?php foreach($rooms as $room){?>
     {
