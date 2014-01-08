@@ -21,7 +21,7 @@ $.getJSON("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&
                             {
                                 "name" : "楼盘简介",
                                 "type" : "view",
-                                "url" : "http://www.weixinfc.com/weapp/php/cgi/jump.php?eid=37&appid=wx05940045fd60e0f1&t=intro"
+                                "url" : "http://www.weixinfc.com/weapp/php/cgi/jump.php?eid=42&appid=wx05940045fd60e0f1&t=intro"
                             },
                             {
                                 "name" : "十里画册",
