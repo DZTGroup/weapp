@@ -14,9 +14,9 @@ if(is_array($data))foreach($data as $type){
 showRooms({
     "banner":"/wechat-estate/upload_files/<?php echo $estate_id?>/<?php echo $top_img?>",
     "rooms":[
-<?php foreach($rooms as $room){?>
+<?php $index=1000; foreach($rooms as $room){?>
     {
-        "id":"1000",
+        "id":"<?php echo $index; ?>",
         "name":"<?php echo $room['base-info']['name']?>",
         "desc":"<?php echo $room['typename']?>",
         "rooms":"<?php echo $room['base-info']['desc']?>",
@@ -67,6 +67,6 @@ showRooms({
             "bimg":""
         }]
     },
-<?php }?>
+<?php $index++;}?>
      ]
 });
